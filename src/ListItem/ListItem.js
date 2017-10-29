@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const ListItem = ({
   children,
-  disabled,
+  disabled = false,
   disabledTextColor = 'rgb(189,189,189)',
   onPress,
   style,
