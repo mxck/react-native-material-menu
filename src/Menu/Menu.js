@@ -33,8 +33,8 @@ class Menu extends React.Component {
     buttonWidth: 0,
     buttonHeight: 0,
 
-    menuSizeAnim: new Animated.ValueXY({ x: 0, y: 0 }),
-    opacityAnim: new Animated.Value(0),
+    menuSizeAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
+    opacityAnimation: new Animated.Value(0),
   };
 
   animationDuration = 300;
@@ -55,12 +55,12 @@ class Menu extends React.Component {
       },
       () => {
         Animated.parallel([
-          Animated.timing(this.state.menuSizeAnim, {
+          Animated.timing(this.state.menuSizeAnimation, {
             toValue: { x: width, y: height },
             duration: this.animationDuration,
             easing: this.easing,
           }),
-          Animated.timing(this.state.opacityAnim, {
+          Animated.timing(this.state.opacityAnimation, {
             toValue: 1,
             duration: this.animationDuration,
             easing: this.easing,
@@ -82,7 +82,7 @@ class Menu extends React.Component {
   };
 
   hide = () => {
-    Animated.timing(this.state.opacityAnim, {
+    Animated.timing(this.state.opacityAnimation, {
       toValue: 0,
       duration: this.animationDuration,
       easing: this.easing,
@@ -91,8 +91,8 @@ class Menu extends React.Component {
       this.setState({
         modalOpened: false,
         animationStarted: false,
-        menuSizeAnim: new Animated.ValueXY({ x: 0, y: 0 }),
-        opacityAnim: new Animated.Value(0),
+        menuSizeAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
+        opacityAnimation: new Animated.Value(0),
       }),
     );
   };
@@ -106,10 +106,10 @@ class Menu extends React.Component {
   render() {
     const dimensions = Dimensions.get('screen');
 
-    const { menuSizeAnim } = this.state;
+    const { menuSizeAnimation } = this.state;
     const menuSize = {
-      width: menuSizeAnim.x,
-      height: menuSizeAnim.y,
+      width: menuSizeAnimation.x,
+      height: menuSizeAnimation.y,
     };
 
     // Adjust position of menu
@@ -119,7 +119,7 @@ class Menu extends React.Component {
     // If menu hits right
     if (left > dimensions.width - this.state.menuWidth) {
       transforms.push({
-        translateX: Animated.multiply(menuSizeAnim.x, -1),
+        translateX: Animated.multiply(menuSizeAnimation.x, -1),
       });
 
       left += this.state.buttonWidth;
@@ -128,14 +128,14 @@ class Menu extends React.Component {
     // If menu hits bottom
     if (top > dimensions.height - this.state.menuHeight) {
       transforms.push({
-        translateY: Animated.multiply(menuSizeAnim.y, -1),
+        translateY: Animated.multiply(menuSizeAnimation.y, -1),
       });
 
       top += this.state.buttonHeight;
     }
 
     const menuContainerStyle = {
-      opacity: this.state.opacityAnim,
+      opacity: this.state.opacityAnimation,
       transform: transforms,
       left,
       top,
