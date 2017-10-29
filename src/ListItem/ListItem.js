@@ -33,7 +33,7 @@ const ListItem = ({
 ListItem.propTypes = {
   children: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
-  disabledTextColor: PropTypes.text,
+  disabledTextColor: PropTypes.string,
   onPress: PropTypes.func,
   style: TouchableHighlight.propTypes.style,
   textStyle: Text.propTypes.style,
