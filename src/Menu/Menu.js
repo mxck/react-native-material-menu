@@ -143,9 +143,7 @@ class Menu extends React.Component {
 
     return (
       <View ref={this._setContainerRef}>
-        <TouchableOpacity onLayout={this._onButtonLayout} onPress={this.show}>
-          {this.props.button}
-        </TouchableOpacity>
+        <View onLayout={this._onButtonLayout}>{this.props.button}</View>
 
         <Modal visible={this.state.modalOpened} transparent>
           <TouchableWithoutFeedback onPress={this.hide}>
