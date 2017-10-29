@@ -14,16 +14,9 @@ import {
 import PropTypes from 'prop-types';
 
 class Menu extends React.Component {
-  static defaultProps = {
-    animationDuration: 300,
-    easing: Easing.bezier(0.4, 0, 0.2, 1),
-  };
-
   static propTypes = {
-    animationDuration: PropTypes.number,
     button: PropTypes.node.isRequired,
     children: PropTypes.node.isRequired,
-    easing: PropTypes.func,
     menuStyle: View.propTypes.style,
   };
 
@@ -44,6 +37,9 @@ class Menu extends React.Component {
     opacityAnim: new Animated.Value(0),
   };
 
+  animationDuration = 300;
+  easing = Easing.bezier(0.4, 0, 0.2, 1);
+
   _onMenulLayout = e => {
     if (this.state.animationStarted) {
       return;
@@ -61,13 +57,13 @@ class Menu extends React.Component {
         Animated.parallel([
           Animated.timing(this.state.menuSizeAnim, {
             toValue: { x: width, y: height },
-            duration: this.props.animationDuration,
-            easing: this.props.easing,
+            duration: this.animationDuration,
+            easing: this.easing,
           }),
           Animated.timing(this.state.opacityAnim, {
             toValue: 1,
-            duration: this.props.animationDuration,
-            easing: this.props.easing,
+            duration: this.animationDuration,
+            easing: this.easing,
           }),
         ]).start();
       },
@@ -79,17 +75,17 @@ class Menu extends React.Component {
     this.setState({ buttonWidth: width, buttonHeight: height });
   };
 
-  showMenu = () => {
+  show = () => {
     this.container.measureInWindow((x, y) => {
       this.setState({ modalOpened: true, top: y, left: x });
     });
   };
 
-  hideMenu = () => {
+  hide = () => {
     Animated.timing(this.state.opacityAnim, {
       toValue: 0,
-      duration: this.props.animationDuration,
-      easing: this.props.easing,
+      duration: this.animationDuration,
+      easing: this.easing,
     }).start(() =>
       // Reset state
       this.setState({
@@ -147,15 +143,12 @@ class Menu extends React.Component {
 
     return (
       <View ref={this._setContainerRef}>
-        <TouchableOpacity
-          onLayout={this._onButtonLayout}
-          onPress={this.showMenu}
-        >
+        <TouchableOpacity onLayout={this._onButtonLayout} onPress={this.show}>
           {this.props.button}
         </TouchableOpacity>
 
         <Modal visible={this.state.modalOpened} transparent>
-          <TouchableWithoutFeedback onPress={this.hideMenu}>
+          <TouchableWithoutFeedback onPress={this.hide}>
             <View style={StyleSheet.absoluteFill}>
               <Animated.View
                 onLayout={this._onMenulLayout}

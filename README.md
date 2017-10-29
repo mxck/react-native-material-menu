@@ -56,8 +56,6 @@ class TestMenu extends React.Component {
 :----------------- |:--------------------------------------------- | --------:|:------------------
  children          | Components rendered in menu (required)        |   Node   | -
  button            | Button component (required)                   |   Node   | -
- animationDuration | Text field animation duration in ms           |   Number | 300
- easing            | Easing function                               |   Func   | Easing.bezier(0.4, 0, 0.2, 1)
  menuStyle         | Menu style                                    |   Style  | -
 
 
@@ -65,8 +63,8 @@ class TestMenu extends React.Component {
 
  name            | description
 :--------------- |:------------------------------
- showMenu()      | Shows menu
- hideMenu()      | Hides menu
+ show()      | Shows menu
+ hide()      | Hides menu
 
 ## ListItem
 
