@@ -17,7 +17,7 @@ yarn add react-native-material-menu
 
 ## Usage
 
-```javascript
+```jsx
 import Menu, { ListItem } from 'react-native-material-menu';
 
 class TestMenu extends React.Component {
