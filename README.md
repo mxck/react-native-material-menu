@@ -28,7 +28,7 @@ class TestMenu extends React.Component {
   menu = null;
 
   hideMenu = () => {
-    this.menu.hideMenu();
+    this.menu.hide();
   };
 
   render() {
