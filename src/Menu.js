@@ -6,7 +6,6 @@ import {
   Modal,
   Platform,
   StyleSheet,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
@@ -17,11 +16,11 @@ class Menu extends React.Component {
   static propTypes = {
     button: PropTypes.node.isRequired,
     children: PropTypes.node.isRequired,
-    menuStyle: View.propTypes.style,
+    style: View.propTypes.style,
   };
 
   state = {
-    modalOpened: false,
+    modalOpen: false,
     animationStarted: false,
 
     top: 0,
@@ -40,6 +39,7 @@ class Menu extends React.Component {
   animationDuration = 300;
   easing = Easing.bezier(0.4, 0, 0.2, 1);
 
+  // Start menu animation
   _onMenulLayout = e => {
     if (this.state.animationStarted) {
       return;
@@ -70,14 +70,15 @@ class Menu extends React.Component {
     );
   };
 
+  // Saving button width and height for menu layout
   _onButtonLayout = e => {
     const { width, height } = e.nativeEvent.layout;
     this.setState({ buttonWidth: width, buttonHeight: height });
   };
 
   show = () => {
-    this.container.measureInWindow((x, y) => {
-      this.setState({ modalOpened: true, top: y, left: x });
+    this._container.measureInWindow((x, y) => {
+      this.setState({ modalOpen: true, top: y, left: x });
     });
   };
 
@@ -89,7 +90,7 @@ class Menu extends React.Component {
     }).start(() =>
       // Reset state
       this.setState({
-        modalOpened: false,
+        modalOpen: false,
         animationStarted: false,
         menuSizeAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
         opacityAnimation: new Animated.Value(0),
@@ -98,10 +99,10 @@ class Menu extends React.Component {
   };
 
   _setContainerRef = ref => {
-    this.container = ref;
+    this._container = ref;
   };
 
-  container = null;
+  _container = null;
 
   render() {
     const dimensions = Dimensions.get('screen');
@@ -134,7 +135,7 @@ class Menu extends React.Component {
       top += this.state.buttonHeight;
     }
 
-    const menuContainerStyle = {
+    const shadowMenuContainerStyle = {
       opacity: this.state.opacityAnimation,
       transform: transforms,
       left,
@@ -145,19 +146,22 @@ class Menu extends React.Component {
       <View ref={this._setContainerRef}>
         <View onLayout={this._onButtonLayout}>{this.props.button}</View>
 
-        <Modal visible={this.state.modalOpened} transparent>
+        <Modal visible={this.state.modalOpen} transparent>
           <TouchableWithoutFeedback onPress={this.hide}>
             <View style={StyleSheet.absoluteFill}>
               <Animated.View
                 onLayout={this._onMenulLayout}
                 style={[
-                  styles.menuContainer,
-                  menuContainerStyle,
-                  this.props.menuStyle,
+                  styles.shadowMenuContainer,
+                  shadowMenuContainerStyle,
+                  this.props.style,
                 ]}
               >
                 <Animated.View
-                  style={[styles.menu, this.state.animationStarted && menuSize]}
+                  style={[
+                    styles.menuContainer,
+                    this.state.animationStarted && menuSize,
+                  ]}
                 >
                   {this.props.children}
                 </Animated.View>
@@ -171,7 +175,7 @@ class Menu extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  menuContainer: {
+  shadowMenuContainer: {
     position: 'absolute',
     backgroundColor: 'white',
     borderRadius: 2,
@@ -191,7 +195,7 @@ const styles = StyleSheet.create({
     }),
   },
 
-  menu: {
+  menuContainer: {
     overflow: 'hidden',
   },
 });

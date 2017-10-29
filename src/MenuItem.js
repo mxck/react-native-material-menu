@@ -3,40 +3,40 @@ import { StyleSheet, Text, TouchableHighlight } from 'react-native';
 
 import PropTypes from 'prop-types';
 
-const ListItem = ({
-  children,
-  disabled = false,
-  disabledTextColor = 'rgb(189,189,189)',
-  onPress,
-  style,
-  textStyle,
-}) => (
+const MenuItem = props => (
   <TouchableHighlight
-    disabled={disabled}
-    onPress={onPress}
-    style={[styles.container, style]}
-    underlayColor="rgb(224,224,224)"
+    disabled={props.disabled}
+    onPress={props.onPress}
+    style={[styles.container, props.style]}
+    underlayColor={props.underlayColor}
   >
     <Text
       numberOfLines={1}
       style={[
         styles.title,
-        disabled && { color: disabledTextColor },
-        textStyle,
+        props.disabled && { color: props.disabledTextColor },
+        props.textStyle,
       ]}
     >
-      {children}
+      {props.children}
     </Text>
   </TouchableHighlight>
 );
 
-ListItem.propTypes = {
+MenuItem.propTypes = {
   children: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   disabledTextColor: PropTypes.string,
   onPress: PropTypes.func,
   style: TouchableHighlight.propTypes.style,
   textStyle: Text.propTypes.style,
+  underlayColor: TouchableHighlight.propTypes.underlayColor,
+};
+
+MenuItem.defaultProps = {
+  disabled: false,
+  disabledTextColor: 'rgb(189,189,189)',
+  underlayColor: 'rgb(224,224,224)',
 };
 
 const styles = StyleSheet.create({
@@ -52,8 +52,6 @@ const styles = StyleSheet.create({
     lineHeight: 48,
     paddingHorizontal: 16,
   },
-
-  disabled: {},
 });
 
-export default ListItem;
+export default MenuItem;

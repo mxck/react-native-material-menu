@@ -1,5 +1,5 @@
-import ListItem from './ListItem';
+import MenuItem from './MenuItem';
 import Menu from './Menu';
 
-export { ListItem };
+export { MenuItem };
 export default Menu;
