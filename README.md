@@ -1,12 +1,14 @@
 # react-native-material-menu
 
+[![npm](https://img.shields.io/npm/v/react-native-material-menu.svg?style=flat-square)](https://www.npmjs.com/package/react-native-material-menu)
+
 Pure JavaScript [material menu](https://material.io/guidelines/components/menus.html) component for React Native.
 
 <img src="https://media.giphy.com/media/3ov9jUvQH4U82JGNRC/giphy.gif" />
 
 ## Install
 
-```
+```bash
 npm install --save react-native-material-menu
 
 or
@@ -20,7 +22,7 @@ yarn add react-native-material-menu
 ```jsx
 import Menu, { MenuItem } from 'react-native-material-menu';
 
-class MyMenu extends React.Component {
+class App extends React.Component {
   setMenuRef = ref => {
     this.menu = ref;
   };
@@ -63,7 +65,7 @@ class MyMenu extends React.Component {
 :----------------- |:--------------------------------------------- | --------:|:------------------
  children          | Components rendered in menu (required)        |   Node   | -
  button            | Button component (required)                   |   Node   | -
- menuStyle         | Menu style                                    |   Style  | -
+ style             | Menu style                                    |   Style  | -
 
 
 ### Methods
