@@ -36,8 +36,9 @@ class Menu extends React.Component {
     opacityAnimation: new Animated.Value(0),
   };
 
-  animationDuration = 300;
-  easing = Easing.bezier(0.4, 0, 0.2, 1);
+  _animationDuration = 300;
+  _container = null;
+  _easing = Easing.bezier(0.4, 0, 0.2, 1);
 
   // Start menu animation
   _onMenulLayout = e => {
@@ -57,23 +58,27 @@ class Menu extends React.Component {
         Animated.parallel([
           Animated.timing(this.state.menuSizeAnimation, {
             toValue: { x: width, y: height },
-            duration: this.animationDuration,
-            easing: this.easing,
+            duration: this._animationDuration,
+            easing: this._easing,
           }),
           Animated.timing(this.state.opacityAnimation, {
             toValue: 1,
-            duration: this.animationDuration,
-            easing: this.easing,
+            duration: this._animationDuration,
+            easing: this._easing,
           }),
         ]).start();
       },
     );
   };
 
-  // Saving button width and height for menu layout
+  // Save button width and height for menu layout
   _onButtonLayout = e => {
     const { width, height } = e.nativeEvent.layout;
     this.setState({ buttonWidth: width, buttonHeight: height });
+  };
+
+  _setContainerRef = ref => {
+    this._container = ref;
   };
 
   show = () => {
@@ -85,8 +90,8 @@ class Menu extends React.Component {
   hide = () => {
     Animated.timing(this.state.opacityAnimation, {
       toValue: 0,
-      duration: this.animationDuration,
-      easing: this.easing,
+      duration: this._animationDuration,
+      easing: this._easing,
     }).start(() =>
       // Reset state
       this.setState({
@@ -97,12 +102,6 @@ class Menu extends React.Component {
       }),
     );
   };
-
-  _setContainerRef = ref => {
-    this._container = ref;
-  };
-
-  _container = null;
 
   render() {
     const dimensions = Dimensions.get('screen');
