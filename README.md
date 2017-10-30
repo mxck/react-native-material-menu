@@ -1,6 +1,4 @@
-# react-native-material-menu
-
-[![npm](https://img.shields.io/npm/v/react-native-material-menu.svg?style=flat-square)](https://www.npmjs.com/package/react-native-material-menu)
+# react-native-material-menu &middot; [![npm](https://img.shields.io/npm/v/react-native-material-menu.svg?style=flat-square)](https://www.npmjs.com/package/react-native-material-menu)
 
 Pure JavaScript [material menu](https://material.io/guidelines/components/menus.html) component for React Native.
 
