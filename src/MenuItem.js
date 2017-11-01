@@ -42,6 +42,7 @@ MenuItem.defaultProps = {
 const styles = StyleSheet.create({
   container: {
     height: 48,
+    justifyContent: 'center',
     maxWidth: 248,
     minWidth: 124,
   },
@@ -49,7 +50,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 14,
     fontWeight: '400',
-    lineHeight: 48,
     paddingHorizontal: 16,
   },
 });

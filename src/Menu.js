@@ -142,7 +142,7 @@ class Menu extends React.Component {
     };
 
     return (
-      <View ref={this._setContainerRef}>
+      <View ref={this._setContainerRef} collapsable={false}>
         <View onLayout={this._onButtonLayout}>{this.props.button}</View>
 
         <Modal visible={this.state.modalOpen} transparent>
