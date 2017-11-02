@@ -1,6 +1,6 @@
 {
   "name": "react-native-material-menu",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Material Menu for React Native",
   "main": "src/index.js",
   "keywords": [
