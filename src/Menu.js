@@ -145,7 +145,11 @@ class Menu extends React.Component {
       <View ref={this._setContainerRef} collapsable={false}>
         <View onLayout={this._onButtonLayout}>{this.props.button}</View>
 
-        <Modal visible={this.state.modalOpen} transparent>
+        <Modal
+          visible={this.state.modalOpen}
+          onRequestClose={this.hide}
+          transparent
+        >
           <TouchableWithoutFeedback onPress={this.hide}>
             <View style={StyleSheet.absoluteFill}>
               <Animated.View
