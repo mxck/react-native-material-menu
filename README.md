@@ -22,11 +22,11 @@ yarn add react-native-material-menu
 import Menu, { MenuItem } from 'react-native-material-menu';
 
 class App extends React.PureComponent {
-  menu = null;
-
   setMenuRef = ref => {
     this.menu = ref;
   };
+
+  menu = null;
 
   hideMenu = () => {
     this.menu.hide();
