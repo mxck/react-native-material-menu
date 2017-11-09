@@ -1,6 +1,8 @@
 # react-native-material-menu &middot; [![npm](https://img.shields.io/npm/v/react-native-material-menu.svg)](https://www.npmjs.com/package/react-native-material-menu) [![license](https://img.shields.io/npm/l/react-native-material-menu.svg)](https://github.com/mxck/react-native-material-menu/blob/master/LICENSE)
 
-Pure JavaScript [material menu](https://material.io/guidelines/components/menus.html) component for React Native.
+Pure JavaScript [material
+menu](https://material.io/guidelines/components/menus.html) component for React
+Native.
 
 <img src="https://media.giphy.com/media/3ov9jUvQH4U82JGNRC/giphy.gif" />
 
@@ -14,18 +16,17 @@ or
 yarn add react-native-material-menu
 ```
 
-
 ## Usage
 
 ```jsx
 import Menu, { MenuItem } from 'react-native-material-menu';
 
-class App extends React.Component {
+class App extends React.PureComponent {
+  menu = null;
+
   setMenuRef = ref => {
     this.menu = ref;
   };
-
-  menu = null;
 
   hideMenu = () => {
     this.menu.hide();
@@ -53,39 +54,36 @@ class App extends React.Component {
 }
 ```
 
-
 ## Menu
 
 ### Properties
 
-
- name              | description                                   | type     | default
-:----------------- |:--------------------------------------------- | --------:|:------------------
- children          | Components rendered in menu (required)        |   Node   | -
- button            | Button component (required)                   |   Node   | -
- style             | Menu style                                    |   Style  | -
-
+| name     | description                            |  type | default |
+| :------- | :------------------------------------- | ----: | :------ |
+| children | Components rendered in menu (required) |  Node | -       |
+| button   | Button component (required)            |  Node | -       |
+| style    | Menu style                             | Style | -       |
 
 ### Methods
 
- name            | description
-:--------------- |:------------------------------
- show()      | Shows menu
- hide()      | Hides menu
+| name   | description |
+| :----- | :---------- |
+| show() | Shows menu  |
+| hide() | Hides menu  |
 
 ## ListItem
 
 ### Properties
 
- name              | description                          | type       | default
-:----------------- |:------------------------------------ | ----------:|:------------------
- children          | Rendered text (required)             |   String   | -
- disabled          | Disabled flag                        |   Bool     | false
- disabledTextColor | Disabled text color                  |   String   | "rgb(224,224,224)"
- onPress           | Called function on press             |   Func     | -
- style             | Container style                      |   Style    | -
- textStyle         | Text style                           |   Style    | -
- underlayColor     | Pressed color                        |   String   | "rgb(224,224,224)"
+| name              | description              |   type | default            |
+| :---------------- | :----------------------- | -----: | :----------------- |
+| children          | Rendered text (required) | String | -                  |
+| disabled          | Disabled flag            |   Bool | false              |
+| disabledTextColor | Disabled text color      | String | "rgb(224,224,224)" |
+| onPress           | Called function on press |   Func | -                  |
+| style             | Container style          |  Style | -                  |
+| textStyle         | Text style               |  Style | -                  |
+| underlayColor     | Pressed color            | String | "rgb(224,224,224)" |
 
 ## License
 
