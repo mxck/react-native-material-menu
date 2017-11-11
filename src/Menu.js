@@ -37,6 +37,7 @@ class Menu extends React.Component {
   };
 
   _animationDuration = 300;
+  _menuPaddingVertical = 8;
   _container = null;
   _easing = Easing.bezier(0.4, 0, 0.2, 1);
 
@@ -47,6 +48,7 @@ class Menu extends React.Component {
     }
 
     const { width, height } = e.nativeEvent.layout;
+    const menuHeightWithPadding = height - this._menuPaddingVertical * 2;
 
     this.setState(
       {
@@ -57,7 +59,7 @@ class Menu extends React.Component {
       () => {
         Animated.parallel([
           Animated.timing(this.state.menuSizeAnimation, {
-            toValue: { x: width, y: height },
+            toValue: { x: width, y: menuHeightWithPadding },
             duration: this._animationDuration,
             easing: this._easing,
           }),
@@ -135,6 +137,7 @@ class Menu extends React.Component {
     }
 
     const shadowMenuContainerStyle = {
+      paddingVertical: this._menuPaddingVertical,
       opacity: this.state.opacityAnimation,
       transform: transforms,
       left,
