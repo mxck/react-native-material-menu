@@ -133,7 +133,7 @@ class Menu extends React.Component {
         translateY: Animated.multiply(menuSizeAnimation.y, -1),
       });
 
-      top += this.state.buttonHeight;
+      top += this.state.buttonHeight - this._menuPaddingVertical * 2;
     }
 
     const shadowMenuContainerStyle = {
