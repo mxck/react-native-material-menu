@@ -12,6 +12,12 @@ import {
 
 import PropTypes from 'prop-types';
 
+const STATES = {
+  HIDE: 'HIDE',
+  SHOW: 'SHOW',
+  ANIMATE: 'ANIMATE',
+};
+
 class Menu extends React.Component {
   static propTypes = {
     button: PropTypes.node.isRequired,
@@ -20,8 +26,7 @@ class Menu extends React.Component {
   };
 
   state = {
-    modalOpen: false,
-    animationStarted: false,
+    menuState: STATES.HIDE,
 
     top: 0,
     left: 0,
@@ -43,7 +48,7 @@ class Menu extends React.Component {
 
   // Start menu animation
   _onMenulLayout = e => {
-    if (this.state.animationStarted) {
+    if (this.state.menuState === STATES.ANIMATE) {
       return;
     }
 
@@ -52,7 +57,7 @@ class Menu extends React.Component {
 
     this.setState(
       {
-        animationStarted: true,
+        menuState: STATES.ANIMATE,
         menuWidth: width,
         menuHeight: height,
       },
@@ -85,7 +90,7 @@ class Menu extends React.Component {
 
   show = () => {
     this._container.measureInWindow((x, y) => {
-      this.setState({ modalOpen: true, top: y, left: x });
+      this.setState({ menuState: STATES.SHOW, top: y, left: x });
     });
   };
 
@@ -97,8 +102,7 @@ class Menu extends React.Component {
     }).start(() =>
       // Reset state
       this.setState({
-        modalOpen: false,
-        animationStarted: false,
+        menuState: STATES.HIDE,
         menuSizeAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
         opacityAnimation: new Animated.Value(0),
       }),
@@ -144,15 +148,15 @@ class Menu extends React.Component {
       top,
     };
 
+    const { menuState } = this.state;
+    const animationStarted = menuState === STATES.ANIMATE;
+    const modalVisible = menuState === STATES.SHOW || animationStarted;
+
     return (
       <View ref={this._setContainerRef} collapsable={false}>
         <View onLayout={this._onButtonLayout}>{this.props.button}</View>
 
-        <Modal
-          visible={this.state.modalOpen}
-          onRequestClose={this.hide}
-          transparent
-        >
+        <Modal visible={modalVisible} onRequestClose={this.hide} transparent>
           <TouchableWithoutFeedback onPress={this.hide}>
             <View style={StyleSheet.absoluteFill}>
               <Animated.View
@@ -164,10 +168,7 @@ class Menu extends React.Component {
                 ]}
               >
                 <Animated.View
-                  style={[
-                    styles.menuContainer,
-                    this.state.animationStarted && menuSize,
-                  ]}
+                  style={[styles.menuContainer, animationStarted && menuSize]}
                 >
                   {this.props.children}
                 </Animated.View>
