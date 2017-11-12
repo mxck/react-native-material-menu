@@ -41,9 +41,12 @@ class Menu extends React.Component {
     opacityAnimation: new Animated.Value(0),
   };
 
-  _animationDuration = 300;
-  _menuPaddingVertical = 8;
   _container = null;
+
+  _menuPaddingVertical = 8;
+  _screenIndent = 8;
+
+  _animationDuration = 300;
   _easing = Easing.bezier(0.4, 0, 0.2, 1);
 
   // Start menu animation
@@ -123,7 +126,7 @@ class Menu extends React.Component {
     const transforms = [];
 
     // If menu hits right
-    if (left > dimensions.width - this.state.menuWidth) {
+    if (left > dimensions.width - this.state.menuWidth - this._screenIndent) {
       transforms.push({
         translateX: Animated.multiply(menuSizeAnimation.x, -1),
       });
@@ -132,7 +135,7 @@ class Menu extends React.Component {
     }
 
     // If menu hits bottom
-    if (top > dimensions.height - this.state.menuHeight) {
+    if (top > dimensions.height - this.state.menuHeight - this._screenIndent) {
       transforms.push({
         translateY: Animated.multiply(menuSizeAnimation.y, -1),
       });
