@@ -12,6 +12,17 @@ import {
 
 import PropTypes from 'prop-types';
 
+const STATES = {
+  HIDDEN: 'HIDDEN',
+  SHOWN: 'SHOWN',
+  ANIMATING: 'ANIMATING',
+};
+
+const ANIMATION_DURATION = 300;
+const EASING = Easing.bezier(0.4, 0, 0.2, 1);
+const MENU_PADDING_VERTICAL = 8;
+const SCREEN_INDENT = 8;
+
 class Menu extends React.Component {
   static propTypes = {
     button: PropTypes.node.isRequired,
@@ -20,8 +31,7 @@ class Menu extends React.Component {
   };
 
   state = {
-    modalOpen: false,
-    animationStarted: false,
+    menuState: STATES.HIDDEN,
 
     top: 0,
     left: 0,
@@ -36,23 +46,20 @@ class Menu extends React.Component {
     opacityAnimation: new Animated.Value(0),
   };
 
-  _animationDuration = 300;
-  _menuPaddingVertical = 8;
   _container = null;
-  _easing = Easing.bezier(0.4, 0, 0.2, 1);
 
   // Start menu animation
   _onMenulLayout = e => {
-    if (this.state.animationStarted) {
+    if (this.state.menuState === STATES.ANIMATING) {
       return;
     }
 
     const { width, height } = e.nativeEvent.layout;
-    const menuHeightWithPadding = height - this._menuPaddingVertical * 2;
+    const menuHeightWithPadding = height - MENU_PADDING_VERTICAL * 2;
 
     this.setState(
       {
-        animationStarted: true,
+        menuState: STATES.ANIMATING,
         menuWidth: width,
         menuHeight: height,
       },
@@ -60,13 +67,13 @@ class Menu extends React.Component {
         Animated.parallel([
           Animated.timing(this.state.menuSizeAnimation, {
             toValue: { x: width, y: menuHeightWithPadding },
-            duration: this._animationDuration,
-            easing: this._easing,
+            duration: ANIMATION_DURATION,
+            easing: EASING,
           }),
           Animated.timing(this.state.opacityAnimation, {
             toValue: 1,
-            duration: this._animationDuration,
-            easing: this._easing,
+            duration: ANIMATION_DURATION,
+            easing: EASING,
           }),
         ]).start();
       },
@@ -85,20 +92,19 @@ class Menu extends React.Component {
 
   show = () => {
     this._container.measureInWindow((x, y) => {
-      this.setState({ modalOpen: true, top: y, left: x });
+      this.setState({ menuState: STATES.SHOWN, top: y, left: x });
     });
   };
 
   hide = () => {
     Animated.timing(this.state.opacityAnimation, {
       toValue: 0,
-      duration: this._animationDuration,
-      easing: this._easing,
+      duration: ANIMATION_DURATION,
+      easing: EASING,
     }).start(() =>
       // Reset state
       this.setState({
-        modalOpen: false,
-        animationStarted: false,
+        menuState: STATES.HIDDEN,
         menuSizeAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
         opacityAnimation: new Animated.Value(0),
       }),
@@ -119,7 +125,7 @@ class Menu extends React.Component {
     const transforms = [];
 
     // If menu hits right
-    if (left > dimensions.width - this.state.menuWidth) {
+    if (left > dimensions.width - this.state.menuWidth - SCREEN_INDENT) {
       transforms.push({
         translateX: Animated.multiply(menuSizeAnimation.x, -1),
       });
@@ -128,31 +134,30 @@ class Menu extends React.Component {
     }
 
     // If menu hits bottom
-    if (top > dimensions.height - this.state.menuHeight) {
+    if (top > dimensions.height - this.state.menuHeight - SCREEN_INDENT) {
       transforms.push({
         translateY: Animated.multiply(menuSizeAnimation.y, -1),
       });
 
-      top += this.state.buttonHeight - this._menuPaddingVertical * 2;
+      top += this.state.buttonHeight - MENU_PADDING_VERTICAL * 2;
     }
 
     const shadowMenuContainerStyle = {
-      paddingVertical: this._menuPaddingVertical,
       opacity: this.state.opacityAnimation,
       transform: transforms,
       left,
       top,
     };
 
+    const { menuState } = this.state;
+    const animationStarted = menuState === STATES.ANIMATING;
+    const modalVisible = menuState === STATES.SHOWN || animationStarted;
+
     return (
       <View ref={this._setContainerRef} collapsable={false}>
         <View onLayout={this._onButtonLayout}>{this.props.button}</View>
 
-        <Modal
-          visible={this.state.modalOpen}
-          onRequestClose={this.hide}
-          transparent
-        >
+        <Modal visible={modalVisible} onRequestClose={this.hide} transparent>
           <TouchableWithoutFeedback onPress={this.hide}>
             <View style={StyleSheet.absoluteFill}>
               <Animated.View
@@ -164,10 +169,7 @@ class Menu extends React.Component {
                 ]}
               >
                 <Animated.View
-                  style={[
-                    styles.menuContainer,
-                    this.state.animationStarted && menuSize,
-                  ]}
+                  style={[styles.menuContainer, animationStarted && menuSize]}
                 >
                   {this.props.children}
                 </Animated.View>
@@ -186,6 +188,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 2,
     opacity: 0,
+    paddingVertical: MENU_PADDING_VERTICAL,
 
     // Shadow
     ...Platform.select({
