@@ -8,6 +8,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
+  ViewPropTypes,
 } from 'react-native';
 
 import PropTypes from 'prop-types';
@@ -27,7 +28,7 @@ class Menu extends React.Component {
   static propTypes = {
     button: PropTypes.node.isRequired,
     children: PropTypes.node.isRequired,
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
   };
 
   state = {
