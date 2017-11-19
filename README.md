@@ -86,7 +86,7 @@ class App extends React.PureComponent {
 | textStyle         | Text style               |  Style | -                  |
 | underlayColor     | Pressed color            | String | "rgb(224,224,224)" |
 
-## Divider
+## MenuDivider
 
 ### Properties
 
