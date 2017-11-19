@@ -19,7 +19,7 @@ yarn add react-native-material-menu
 ## Usage
 
 ```jsx
-import Menu, { MenuItem } from 'react-native-material-menu';
+import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
 
 class App extends React.PureComponent {
   setMenuRef = ref => {
@@ -47,6 +47,7 @@ class App extends React.PureComponent {
         <MenuItem onPress={this.hideMenu} disabled>
           Test 3
         </MenuItem>
+        <MenuDivider />
         <MenuItem onPress={this.hideMenu}>Test 4</MenuItem>
       </Menu>
     );
@@ -71,7 +72,7 @@ class App extends React.PureComponent {
 | show() | Shows menu  |
 | hide() | Hides menu  |
 
-## ListItem
+## MenuItem
 
 ### Properties
 
@@ -84,6 +85,14 @@ class App extends React.PureComponent {
 | style             | Container style          |  Style | -                  |
 | textStyle         | Text style               |  Style | -                  |
 | underlayColor     | Pressed color            | String | "rgb(224,224,224)" |
+
+## Divider
+
+### Properties
+
+| name  | description |   type | default            |
+| :---- | :---------- | -----: | :----------------- |
+| color | Line color  | String | "rgba(0,0,0,0.12)" |
 
 ## License
 

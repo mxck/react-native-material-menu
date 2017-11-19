@@ -1,5 +1,7 @@
+import MenuDivider from './MenuDivider';
 import MenuItem from './MenuItem';
+
 import Menu from './Menu';
 
-export { MenuItem };
+export { MenuDivider, MenuItem };
 export default Menu;
