@@ -28,6 +28,7 @@ class Menu extends React.Component {
   static propTypes = {
     button: PropTypes.node.isRequired,
     children: PropTypes.node.isRequired,
+    elevation: PropTypes.number,
     style: ViewPropTypes.style,
   };
 
@@ -143,11 +144,24 @@ class Menu extends React.Component {
       top += this.state.buttonHeight - MENU_PADDING_VERTICAL * 2;
     }
 
+    // Shadow
+    const { elevation } = this.props
     const shadowMenuContainerStyle = {
       opacity: this.state.opacityAnimation,
       transform: transforms,
       left,
       top,
+      ...Platform.select({
+         ios: {
+           shadowColor: 'black',
+          shadowOffset: { width: 0, height: elevation ? elevation * 0.6 : 4.8 },
+           shadowOpacity: elevation ? 0.0015 * elevation + 0.18 : 0.192,
+           shadowRadius: elevation ? 0.54 * elevation : 4.32,
+         },
+         android: {
+           elevation: elevation ? elevation : 8,
+         },
+       }),
     };
 
     const { menuState } = this.state;

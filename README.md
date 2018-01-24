@@ -59,11 +59,12 @@ class App extends React.PureComponent {
 
 ### Properties
 
-| name     | description                            |  type | default |
-| :------- | :------------------------------------- | ----: | :------ |
-| children | Components rendered in menu (required) |  Node | -       |
-| button   | Button component (required)            |  Node | -       |
-| style    | Menu style                             | Style | -       |
+| name      | description                            |  type | default |
+| :-------- | :------------------------------------- | ------: | :------ |
+| children  | Components rendered in menu (required) |  Node   | -       |
+| button    | Button component (required)            |  Node   | -       |
+| elevation | Material elevation of the container    |  Number | 8       |
+| style     | Menu style                             | Style   | -       |
 
 ### Methods
 
