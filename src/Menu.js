@@ -204,19 +204,6 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     opacity: 0,
     paddingVertical: MENU_PADDING_VERTICAL,
-
-    // Shadow
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.14,
-        shadowRadius: 2,
-      },
-      android: {
-        elevation: 2,
-      },
-    }),
   },
 
   menuContainer: {
