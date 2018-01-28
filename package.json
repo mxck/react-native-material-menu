@@ -15,15 +15,15 @@
   "author": "Maksim Milyutin <mmxckk@gmail.com> (https://github.com/mxck)",
   "license": "MIT",
   "devDependencies": {
-    "babel-eslint": "~8.0.0",
-    "eslint": "~4.13.0",
+    "babel-eslint": "~8.2.0",
+    "eslint": "~4.16.0",
     "eslint-config-airbnb": "~16.1.0",
     "eslint-config-prettier": "~2.9.0",
-    "eslint-plugin-flowtype": "~2.39.0",
+    "eslint-plugin-flowtype": "~2.42.0",
     "eslint-plugin-import": "~2.8.0",
     "eslint-plugin-jsx-a11y": "~6.0.0",
-    "eslint-plugin-react": "~7.5.0",
-    "prettier": "~1.9.0"
+    "eslint-plugin-react": "~7.6.0",
+    "prettier": "~1.10.0"
   },
   "peerDependencies": {
     "react": "*",
