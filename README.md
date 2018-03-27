@@ -59,11 +59,12 @@ class App extends React.PureComponent {
 
 ### Properties
 
-| name     | description                            |  type | default |
-| :------- | :------------------------------------- | ----: | :------ |
-| children | Components rendered in menu (required) |  Node | -       |
-| button   | Button component (required)            |  Node | -       |
-| style    | Menu style                             | Style | -       |
+| name     | description                            |     type | default |
+| :------- | :------------------------------------- | -------: | :------ |
+| children | Components rendered in menu (required) |     Node | -       |
+| button   | Button component (required)            |     Node | -       |
+| style    | Menu style                             |    Style | -       |
+| onHidden | Callback when menu has become hidden   | Function | -       |
 
 ### Methods
 

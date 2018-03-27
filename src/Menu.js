@@ -29,6 +29,7 @@ class Menu extends React.Component {
     button: PropTypes.node.isRequired,
     children: PropTypes.node.isRequired,
     style: ViewPropTypes.style,
+    onHidden: PropTypes.func,
   };
 
   state = {
@@ -102,14 +103,18 @@ class Menu extends React.Component {
       toValue: 0,
       duration: ANIMATION_DURATION,
       easing: EASING,
-    }).start(() =>
+    }).start(() => {
       // Reset state
       this.setState({
         menuState: STATES.HIDDEN,
         menuSizeAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
         opacityAnimation: new Animated.Value(0),
-      }),
-    );
+      });
+      // Invoke onHidden callback if defined
+      if (this.props.onHidden) {
+        this.props.onHidden();
+      }
+    });
   };
 
   render() {
