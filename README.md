@@ -16,9 +16,12 @@ or
 yarn add react-native-material-menu
 ```
 
-## Usage
+## Usage example
 
 ```jsx
+import React from 'react';
+
+import { View, Text } from 'react-native';
 import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
 
 class App extends React.PureComponent {
@@ -38,21 +41,25 @@ class App extends React.PureComponent {
 
   render() {
     return (
-      <Menu
-        ref={this.setMenuRef}
-        button={<Text onPress={this.showMenu}>Show menu</Text>}
-      >
-        <MenuItem onPress={this.hideMenu}>Test 1</MenuItem>
-        <MenuItem onPress={this.hideMenu}>Test 2</MenuItem>
-        <MenuItem onPress={this.hideMenu} disabled>
-          Test 3
-        </MenuItem>
-        <MenuDivider />
-        <MenuItem onPress={this.hideMenu}>Test 4</MenuItem>
-      </Menu>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Menu
+          ref={this.setMenuRef}
+          button={<Text onPress={this.showMenu}>Show menu</Text>}
+        >
+          <MenuItem onPress={this.hideMenu}>Test 1</MenuItem>
+          <MenuItem onPress={this.hideMenu}>Test 2</MenuItem>
+          <MenuItem onPress={this.hideMenu} disabled>
+            Test 3
+          </MenuItem>
+          <MenuDivider />
+          <MenuItem onPress={this.hideMenu}>Test 4</MenuItem>
+        </Menu>
+      </View>
     );
   }
 }
+
+export default App;
 ```
 
 ## Menu
