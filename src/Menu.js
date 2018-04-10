@@ -15,8 +15,8 @@ import PropTypes from 'prop-types';
 
 const STATES = {
   HIDDEN: 'HIDDEN',
-  SHOWN: 'SHOWN',
   ANIMATING: 'ANIMATING',
+  SHOWN: 'SHOWN',
 };
 
 const ANIMATION_DURATION = 300;
