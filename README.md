@@ -6,6 +6,8 @@ Native.
 
 <img src="https://media.giphy.com/media/3ov9jUvQH4U82JGNRC/giphy.gif" />
 
+> ⚠️ Starting from version 0.3.0 minimum required react-native version is 0.54.
+
 ## Install
 
 ```bash
@@ -25,34 +27,30 @@ import { View, Text } from 'react-native';
 import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
 
 class App extends React.PureComponent {
-  setMenuRef = ref => {
-    this.menu = ref;
-  };
-
-  menu = null;
+  menu = React.createRef();
 
   hideMenu = () => {
-    this.menu.hide();
+    this.menu.current.hide();
   };
 
   showMenu = () => {
-    this.menu.show();
+    this.menu.current.show();
   };
 
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Menu
-          ref={this.setMenuRef}
+          ref={this.menu}
           button={<Text onPress={this.showMenu}>Show menu</Text>}
         >
-          <MenuItem onPress={this.hideMenu}>Test 1</MenuItem>
-          <MenuItem onPress={this.hideMenu}>Test 2</MenuItem>
+          <MenuItem onPress={this.hideMenu}>Menu item 1</MenuItem>
+          <MenuItem onPress={this.hideMenu}>Menu item 2</MenuItem>
           <MenuItem onPress={this.hideMenu} disabled>
-            Test 3
+            Menu item 3
           </MenuItem>
           <MenuDivider />
-          <MenuItem onPress={this.hideMenu}>Test 4</MenuItem>
+          <MenuItem onPress={this.hideMenu}>Menu item 4</MenuItem>
         </Menu>
       </View>
     );

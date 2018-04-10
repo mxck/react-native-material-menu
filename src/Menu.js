@@ -43,7 +43,7 @@ class Menu extends React.Component {
     opacityAnimation: new Animated.Value(0),
   };
 
-  _container = null;
+  _container = React.createRef();
 
   // Start menu animation
   _onMenulLayout = e => {
@@ -83,12 +83,8 @@ class Menu extends React.Component {
     this.setState({ buttonWidth: width, buttonHeight: height });
   };
 
-  _setContainerRef = ref => {
-    this._container = ref;
-  };
-
   show = () => {
-    this._container.measureInWindow((x, y) => {
+    this._container.current.measureInWindow((x, y) => {
       this.setState({ menuState: STATES.SHOWN, top: y, left: x });
     });
   };
@@ -155,7 +151,7 @@ class Menu extends React.Component {
     const modalVisible = menuState === STATES.SHOWN || animationStarted;
 
     return (
-      <View ref={this._setContainerRef} collapsable={false}>
+      <View ref={this._container} collapsable={false}>
         <View onLayout={this._onButtonLayout}>{this.props.button}</View>
 
         <Modal visible={modalVisible} onRequestClose={this.hide} transparent>
