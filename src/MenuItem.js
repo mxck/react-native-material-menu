@@ -1,27 +1,43 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableHighlight } from 'react-native';
 
 import PropTypes from 'prop-types';
+import { StyleSheet, Text, TouchableHighlight } from 'react-native';
 
-const MenuItem = props => (
-  <TouchableHighlight
-    disabled={props.disabled}
-    onPress={props.onPress}
-    style={[styles.container, props.style]}
-    underlayColor={props.underlayColor}
-  >
-    <Text
-      numberOfLines={1}
-      style={[
-        styles.title,
-        props.disabled && { color: props.disabledTextColor },
-        props.textStyle,
-      ]}
-    >
-      {props.children}
-    </Text>
-  </TouchableHighlight>
-);
+import WidthContext from './WidthContext';
+
+function MenuItem({
+  children,
+  disabled,
+  disabledTextColor,
+  onPress,
+  style,
+  textStyle,
+  underlayColor,
+}) {
+  return (
+    <WidthContext.Consumer>
+      {width => (
+        <TouchableHighlight
+          disabled={disabled}
+          onPress={onPress}
+          style={[styles.container, style, { width }]}
+          underlayColor={underlayColor}
+        >
+          <Text
+            numberOfLines={1}
+            style={[
+              styles.title,
+              disabled && { color: disabledTextColor },
+              textStyle,
+            ]}
+          >
+            {children}
+          </Text>
+        </TouchableHighlight>
+      )}
+    </WidthContext.Consumer>
+  );
+}
 
 MenuItem.propTypes = {
   children: PropTypes.string.isRequired,
@@ -35,8 +51,8 @@ MenuItem.propTypes = {
 
 MenuItem.defaultProps = {
   disabled: false,
-  disabledTextColor: 'rgb(189,189,189)',
-  underlayColor: 'rgb(224,224,224)',
+  disabledTextColor: '#BDBDBD',
+  underlayColor: '#E0E0E0',
 };
 
 const styles = StyleSheet.create({
@@ -46,7 +62,6 @@ const styles = StyleSheet.create({
     maxWidth: 248,
     minWidth: 124,
   },
-
   title: {
     fontSize: 14,
     fontWeight: '400',

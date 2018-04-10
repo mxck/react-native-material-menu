@@ -1,4 +1,6 @@
 import React from 'react';
+
+import PropTypes from 'prop-types';
 import {
   Animated,
   Dimensions,
@@ -11,12 +13,12 @@ import {
   ViewPropTypes,
 } from 'react-native';
 
-import PropTypes from 'prop-types';
+import WidthContext from './WidthContext';
 
 const STATES = {
   HIDDEN: 'HIDDEN',
-  SHOWN: 'SHOWN',
   ANIMATING: 'ANIMATING',
+  SHOWN: 'SHOWN',
 };
 
 const ANIMATION_DURATION = 300;
@@ -25,13 +27,6 @@ const MENU_PADDING_VERTICAL = 8;
 const SCREEN_INDENT = 8;
 
 class Menu extends React.Component {
-  static propTypes = {
-    button: PropTypes.node.isRequired,
-    children: PropTypes.node.isRequired,
-    style: ViewPropTypes.style,
-    onHidden: PropTypes.func,
-  };
-
   state = {
     menuState: STATES.HIDDEN,
 
@@ -48,7 +43,7 @@ class Menu extends React.Component {
     opacityAnimation: new Animated.Value(0),
   };
 
-  _container = null;
+  _container = React.createRef();
 
   // Start menu animation
   _onMenulLayout = e => {
@@ -88,12 +83,8 @@ class Menu extends React.Component {
     this.setState({ buttonWidth: width, buttonHeight: height });
   };
 
-  _setContainerRef = ref => {
-    this._container = ref;
-  };
-
   show = () => {
-    this._container.measureInWindow((x, y) => {
+    this._container.current.measureInWindow((x, y) => {
       this.setState({ menuState: STATES.SHOWN, top: y, left: x });
     });
   };
@@ -130,7 +121,7 @@ class Menu extends React.Component {
     let { left, top } = this.state;
     const transforms = [];
 
-    // If menu hits right
+    // Flip by X axis if menu hits right screen border
     if (left > dimensions.width - this.state.menuWidth - SCREEN_INDENT) {
       transforms.push({
         translateX: Animated.multiply(menuSizeAnimation.x, -1),
@@ -139,7 +130,7 @@ class Menu extends React.Component {
       left += this.state.buttonWidth;
     }
 
-    // If menu hits bottom
+    // Flip by Y axis if menu hits bottom screen border
     if (top > dimensions.height - this.state.menuHeight - SCREEN_INDENT) {
       transforms.push({
         translateY: Animated.multiply(menuSizeAnimation.y, -1),
@@ -160,7 +151,7 @@ class Menu extends React.Component {
     const modalVisible = menuState === STATES.SHOWN || animationStarted;
 
     return (
-      <View ref={this._setContainerRef} collapsable={false}>
+      <View ref={this._container} collapsable={false}>
         <View onLayout={this._onButtonLayout}>{this.props.button}</View>
 
         <Modal visible={modalVisible} onRequestClose={this.hide} transparent>
@@ -177,7 +168,9 @@ class Menu extends React.Component {
                 <Animated.View
                   style={[styles.menuContainer, animationStarted && menuSize]}
                 >
-                  {this.props.children}
+                  <WidthContext.Provider value={this.state.menuWidth}>
+                    {this.props.children}
+                  </WidthContext.Provider>
                 </Animated.View>
               </Animated.View>
             </View>
@@ -187,6 +180,13 @@ class Menu extends React.Component {
     );
   }
 }
+
+Menu.propTypes = {
+  button: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
+  style: ViewPropTypes.style,
+  onHidden: PropTypes.func,
+};
 
 const styles = StyleSheet.create({
   shadowMenuContainer: {
@@ -209,7 +209,6 @@ const styles = StyleSheet.create({
       },
     }),
   },
-
   menuContainer: {
     overflow: 'hidden',
   },
