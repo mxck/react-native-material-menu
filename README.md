@@ -84,15 +84,15 @@ export default App;
 
 ### Properties
 
-| name              | description              |   type | default            |
-| :---------------- | :----------------------- | -----: | :----------------- |
-| children          | Rendered text (required) | String | -                  |
-| disabled          | Disabled flag            |   Bool | false              |
-| disabledTextColor | Disabled text color      | String | "rgb(224,224,224)" |
-| onPress           | Called function on press |   Func | -                  |
-| style             | Container style          |  Style | -                  |
-| textStyle         | Text style               |  Style | -                  |
-| underlayColor     | Pressed color            | String | "rgb(224,224,224)" |
+| name              | description              |   type | default   |
+| :---------------- | :----------------------- | -----: | :-------- |
+| children          | Rendered text (required) | String | -         |
+| disabled          | Disabled flag            |   Bool | false     |
+| disabledTextColor | Disabled text color      | String | "#BDBDBD" |
+| onPress           | Called function on press |   Func | -         |
+| style             | Container style          |  Style | -         |
+| textStyle         | Text style               |  Style | -         |
+| underlayColor     | Pressed color            | String | "#E0E0E0" |
 
 ## MenuDivider
 

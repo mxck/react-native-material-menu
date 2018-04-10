@@ -25,13 +25,6 @@ const MENU_PADDING_VERTICAL = 8;
 const SCREEN_INDENT = 8;
 
 class Menu extends React.Component {
-  static propTypes = {
-    button: PropTypes.node.isRequired,
-    children: PropTypes.node.isRequired,
-    style: ViewPropTypes.style,
-    onHidden: PropTypes.func,
-  };
-
   state = {
     menuState: STATES.HIDDEN,
 
@@ -130,7 +123,7 @@ class Menu extends React.Component {
     let { left, top } = this.state;
     const transforms = [];
 
-    // If menu hits right
+    // Flip by X axis if menu hits right screen border
     if (left > dimensions.width - this.state.menuWidth - SCREEN_INDENT) {
       transforms.push({
         translateX: Animated.multiply(menuSizeAnimation.x, -1),
@@ -139,7 +132,7 @@ class Menu extends React.Component {
       left += this.state.buttonWidth;
     }
 
-    // If menu hits bottom
+    // Flip by Y axis if menu hits bottom screen border
     if (top > dimensions.height - this.state.menuHeight - SCREEN_INDENT) {
       transforms.push({
         translateY: Animated.multiply(menuSizeAnimation.y, -1),
@@ -188,6 +181,13 @@ class Menu extends React.Component {
   }
 }
 
+Menu.propTypes = {
+  button: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
+  style: ViewPropTypes.style,
+  onHidden: PropTypes.func,
+};
+
 const styles = StyleSheet.create({
   shadowMenuContainer: {
     position: 'absolute',
@@ -209,7 +209,6 @@ const styles = StyleSheet.create({
       },
     }),
   },
-
   menuContainer: {
     overflow: 'hidden',
   },
