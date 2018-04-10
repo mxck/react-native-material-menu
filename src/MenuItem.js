@@ -1,7 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableHighlight } from 'react-native';
 
 import PropTypes from 'prop-types';
+import { StyleSheet, Text, TouchableHighlight } from 'react-native';
+
+import WidthContext from './WidthContext';
 
 function MenuItem({
   children,
@@ -13,23 +15,27 @@ function MenuItem({
   underlayColor,
 }) {
   return (
-    <TouchableHighlight
-      disabled={disabled}
-      onPress={onPress}
-      style={[styles.container, style]}
-      underlayColor={underlayColor}
-    >
-      <Text
-        numberOfLines={1}
-        style={[
-          styles.title,
-          disabled && { color: disabledTextColor },
-          textStyle,
-        ]}
-      >
-        {children}
-      </Text>
-    </TouchableHighlight>
+    <WidthContext.Consumer>
+      {width => (
+        <TouchableHighlight
+          disabled={disabled}
+          onPress={onPress}
+          style={[styles.container, style, { width }]}
+          underlayColor={underlayColor}
+        >
+          <Text
+            numberOfLines={1}
+            style={[
+              styles.title,
+              disabled && { color: disabledTextColor },
+              textStyle,
+            ]}
+          >
+            {children}
+          </Text>
+        </TouchableHighlight>
+      )}
+    </WidthContext.Consumer>
   );
 }
 

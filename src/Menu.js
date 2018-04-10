@@ -1,4 +1,6 @@
 import React from 'react';
+
+import PropTypes from 'prop-types';
 import {
   Animated,
   Dimensions,
@@ -11,7 +13,7 @@ import {
   ViewPropTypes,
 } from 'react-native';
 
-import PropTypes from 'prop-types';
+import WidthContext from './WidthContext';
 
 const STATES = {
   HIDDEN: 'HIDDEN',
@@ -170,7 +172,9 @@ class Menu extends React.Component {
                 <Animated.View
                   style={[styles.menuContainer, animationStarted && menuSize]}
                 >
-                  {this.props.children}
+                  <WidthContext.Provider value={this.state.menuWidth}>
+                    {this.props.children}
+                  </WidthContext.Provider>
                 </Animated.View>
               </Animated.View>
             </View>
