@@ -27,21 +27,25 @@ import { View, Text } from 'react-native';
 import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
 
 class App extends React.PureComponent {
-  menu = React.createRef();
+  _menu = null;
+
+  setMenuRef = ref => {
+    this._menu = ref;
+  };
 
   hideMenu = () => {
-    this.menu.current.hide();
+    this._menu.hide();
   };
 
   showMenu = () => {
-    this.menu.current.show();
+    this._menu.show();
   };
 
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Menu
-          ref={this.menu}
+          ref={this.setMenuRef}
           button={<Text onPress={this.showMenu}>Show menu</Text>}
         >
           <MenuItem onPress={this.hideMenu}>Menu item 1</MenuItem>
