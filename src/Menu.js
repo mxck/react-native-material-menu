@@ -11,6 +11,7 @@ import {
   TouchableWithoutFeedback,
   View,
   ViewPropTypes,
+  I18nManager
 } from 'react-native';
 
 import WidthContext from './WidthContext';
@@ -31,13 +32,13 @@ class Menu extends React.Component {
     menuState: STATES.HIDDEN,
 
     top: 0,
-    left: 0,
+    [I18nManager.isRTL ? 'right': 'left' ]: 0,
 
     menuWidth: 0,
     menuHeight: 0,
 
-    buttonWidth: 0,
-    buttonHeight: 0,
+    buttonWidth: 0,    
+    buttonHeight: 0,    
 
     menuSizeAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
     opacityAnimation: new Animated.Value(0),
@@ -89,7 +90,7 @@ class Menu extends React.Component {
 
   show = () => {
     this._container.measureInWindow((x, y) => {
-      this.setState({ menuState: STATES.SHOWN, top: y, left: x });
+      this.setState({ menuState: STATES.SHOWN, top: y, [I18nManager.isRTL ? 'right': 'left' ]: x });
     });
   };
 
@@ -122,16 +123,30 @@ class Menu extends React.Component {
     };
 
     // Adjust position of menu
-    let { left, top } = this.state;
+    let LEFT_OR_RIGHT = null;
+    let { top } = this.state;
+    
+    if (I18nManager.isRTL) {
+      let {
+        right
+      } = this.state;
+      LEFT_OR_RIGHT = right;
+    } else {
+      let {
+        left
+      } = this.state;
+      LEFT_OR_RIGHT = left;
+    }
+  
     const transforms = [];
 
-    // Flip by X axis if menu hits right screen border
-    if (left > dimensions.width - this.state.menuWidth - SCREEN_INDENT) {
+    // Flip by X axis if menu hits sideways screen border
+    if (LEFT_OR_RIGHT > dimensions.width - this.state.menuWidth - SCREEN_INDENT) {
       transforms.push({
         translateX: Animated.multiply(menuSizeAnimation.x, -1),
       });
 
-      left += this.state.buttonWidth;
+      LEFT_OR_RIGHT += this.state.buttonWidth;
     }
 
     // Flip by Y axis if menu hits bottom screen border
@@ -146,9 +161,9 @@ class Menu extends React.Component {
     const shadowMenuContainerStyle = {
       opacity: this.state.opacityAnimation,
       transform: transforms,
-      left,
+      [I18nManager.isRTL ? 'right': 'left' ]: LEFT_OR_RIGHT,
       top,
-    };
+    };  
 
     const { menuState } = this.state;
     const animationStarted = menuState === STATES.ANIMATING;
