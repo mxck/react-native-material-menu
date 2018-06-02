@@ -2,7 +2,7 @@
 
 Pure JavaScript [material
 menu](https://material.io/guidelines/components/menus.html) component for React
-Native.
+Native(with automatic `RTL` support).
 
 <img src="https://media.giphy.com/media/3ov9jUvQH4U82JGNRC/giphy.gif" />
 
