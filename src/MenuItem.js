@@ -3,8 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, Text, TouchableHighlight } from 'react-native';
 
-import WidthContext from './WidthContext';
-
 function MenuItem({
   children,
   disabled,
@@ -15,27 +13,24 @@ function MenuItem({
   underlayColor,
 }) {
   return (
-    <WidthContext.Consumer>
-      {width => (
-        <TouchableHighlight
-          disabled={disabled}
-          onPress={onPress}
-          style={[styles.container, style, { width }]}
-          underlayColor={underlayColor}
-        >
-          <Text
-            numberOfLines={1}
-            style={[
-              styles.title,
-              disabled && { color: disabledTextColor },
-              textStyle,
-            ]}
-          >
-            {children}
-          </Text>
-        </TouchableHighlight>
-      )}
-    </WidthContext.Consumer>
+    <TouchableHighlight
+      disabled={disabled}
+      onPress={onPress}
+      style={[styles.container, style]}
+      underlayColor={underlayColor}
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={[
+          styles.title,
+          disabled && { color: disabledTextColor },
+          textStyle,
+        ]}
+      >
+        {children}
+      </Text>
+    </TouchableHighlight>
   );
 }
 

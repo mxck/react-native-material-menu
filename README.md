@@ -6,8 +6,6 @@ Native.
 
 <img src="https://media.giphy.com/media/3ov9jUvQH4U82JGNRC/giphy.gif" />
 
-> ⚠️ Starting from version 0.3.0 minimum required react-native version is 0.54.
-
 ## Install
 
 ```bash
