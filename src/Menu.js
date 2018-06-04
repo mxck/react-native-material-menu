@@ -45,12 +45,12 @@ class Menu extends React.Component {
 
   _container = null;
 
-  _setCointainerRef = ref => {
+  _setContainerRef = ref => {
     this._container = ref;
   };
 
   // Start menu animation
-  _onMenulLayout = e => {
+  _onMenuLayout = e => {
     if (this.state.menuState === STATES.ANIMATING) {
       return;
     }
@@ -155,14 +155,14 @@ class Menu extends React.Component {
     const modalVisible = menuState === STATES.SHOWN || animationStarted;
 
     return (
-      <View ref={this._setCointainerRef} collapsable={false}>
+      <View ref={this._setContainerRef} collapsable={false}>
         <View onLayout={this._onButtonLayout}>{this.props.button}</View>
 
         <Modal visible={modalVisible} onRequestClose={this.hide} transparent>
           <TouchableWithoutFeedback onPress={this.hide}>
             <View style={StyleSheet.absoluteFill}>
               <Animated.View
-                onLayout={this._onMenulLayout}
+                onLayout={this._onMenuLayout}
                 style={[
                   styles.shadowMenuContainer,
                   shadowMenuContainerStyle,
