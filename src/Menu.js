@@ -100,15 +100,19 @@ class Menu extends React.Component {
       easing: EASING,
     }).start(() => {
       // Reset state
-      this.setState({
-        menuState: STATES.HIDDEN,
-        menuSizeAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
-        opacityAnimation: new Animated.Value(0),
-      });
-      // Invoke onHidden callback if defined
-      if (this.props.onHidden) {
-        this.props.onHidden();
-      }
+      this.setState(
+        {
+          menuState: STATES.HIDDEN,
+          menuSizeAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
+          opacityAnimation: new Animated.Value(0),
+        },
+        () => {
+          // Invoke onHidden callback if defined
+          if (this.props.onHidden) {
+            this.props.onHidden();
+          }
+        },
+      );
     });
   };
 
