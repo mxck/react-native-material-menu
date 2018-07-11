@@ -11,6 +11,7 @@ function MenuItem({
   style,
   textStyle,
   underlayColor,
+  testID
 }) {
   return (
     <TouchableHighlight
@@ -18,6 +19,7 @@ function MenuItem({
       onPress={onPress}
       style={[styles.container, style]}
       underlayColor={underlayColor}
+      testID={testID}
     >
       <Text
         ellipsizeMode="clip"
