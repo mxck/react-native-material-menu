@@ -1,7 +1,7 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
-import { StyleSheet, Text, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, TouchableHighlight, Platform } from 'react-native';
 
 function MenuItem({
   children,
@@ -22,7 +22,7 @@ function MenuItem({
       testID={testID}
     >
       <Text
-        ellipsizeMode="clip"
+        ellipsizeMode={Platform.OS === 'ios' ? 'clip' : 'tail'}
         numberOfLines={1}
         style={[
           styles.title,
