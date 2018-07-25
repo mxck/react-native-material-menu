@@ -157,10 +157,25 @@ class Menu extends React.Component {
     const modalVisible = menuState === STATES.SHOWN || animationStarted;
 
     return (
-      <View ref={this._setContainerRef} collapsable={false} testID={this.props.testID}>
+      <View
+        ref={this._setContainerRef}
+        collapsable={false}
+        testID={this.props.testID}
+      >
         <View onLayout={this._onButtonLayout}>{this.props.button}</View>
 
-        <Modal visible={modalVisible} onRequestClose={this.hide} transparent>
+        <Modal
+          visible={modalVisible}
+          onRequestClose={this.hide}
+          supportedOrientations={[
+            'portrait',
+            'portrait-upside-down',
+            'landscape',
+            'landscape-left',
+            'landscape-right',
+          ]}
+          transparent
+        >
           <TouchableWithoutFeedback onPress={this.hide}>
             <View style={StyleSheet.absoluteFill}>
               <Animated.View
