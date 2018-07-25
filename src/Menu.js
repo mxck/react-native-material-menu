@@ -21,7 +21,6 @@ const STATES = {
 
 const ANIMATION_DURATION = 300;
 const EASING = Easing.bezier(0.4, 0, 0.2, 1);
-const MENU_PADDING_VERTICAL = 8;
 const SCREEN_INDENT = 8;
 
 class Menu extends React.Component {
@@ -54,7 +53,6 @@ class Menu extends React.Component {
     }
 
     const { width, height } = e.nativeEvent.layout;
-    const menuHeightWithPadding = height - MENU_PADDING_VERTICAL * 2;
 
     this.setState(
       {
@@ -65,7 +63,7 @@ class Menu extends React.Component {
       () => {
         Animated.parallel([
           Animated.timing(this.state.menuSizeAnimation, {
-            toValue: { x: width, y: menuHeightWithPadding },
+            toValue: { x: width, y: height },
             duration: ANIMATION_DURATION,
             easing: EASING,
           }),
@@ -152,8 +150,7 @@ class Menu extends React.Component {
       });
 
       top =
-        Math.min(dimensions.height - SCREEN_INDENT, top + buttonHeight) -
-        MENU_PADDING_VERTICAL * 2;
+        Math.min(dimensions.height - SCREEN_INDENT, top + buttonHeight);
     }
 
     const shadowMenuContainerStyle = {
@@ -221,9 +218,8 @@ const styles = StyleSheet.create({
   shadowMenuContainer: {
     position: 'absolute',
     backgroundColor: 'white',
-    borderRadius: 2,
+    borderRadius: 4,
     opacity: 0,
-    paddingVertical: MENU_PADDING_VERTICAL,
 
     // Shadow
     ...Platform.select({
