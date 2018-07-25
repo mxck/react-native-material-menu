@@ -87,7 +87,9 @@ class Menu extends React.Component {
 
   show = () => {
     this._container.measureInWindow((x, y) => {
-      this.setState({ menuState: STATES.SHOWN, top: y, left: x });
+      const top = Math.max(SCREEN_INDENT, y);
+      const left = Math.max(SCREEN_INDENT, x);
+      this.setState({ menuState: STATES.SHOWN, top, left });
     });
   };
 
@@ -134,6 +136,7 @@ class Menu extends React.Component {
       });
 
       left += this.state.buttonWidth;
+      left = Math.min(dimensions.width - SCREEN_INDENT, left);
     }
 
     // Flip by Y axis if menu hits bottom screen border
@@ -142,7 +145,8 @@ class Menu extends React.Component {
         translateY: Animated.multiply(menuSizeAnimation.y, -1),
       });
 
-      top += this.state.buttonHeight - MENU_PADDING_VERTICAL * 2;
+      top += this.state.buttonHeight;
+      top = Math.min(dimensions.height - SCREEN_INDENT, top) - MENU_PADDING_VERTICAL * 2;
     }
 
     const shadowMenuContainerStyle = {
