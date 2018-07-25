@@ -42,6 +42,7 @@ MenuItem.propTypes = {
   disabledTextColor: PropTypes.string,
   onPress: PropTypes.func,
   style: TouchableHighlight.propTypes.style,
+  testID: Text.propTypes.testID,
   textStyle: Text.propTypes.style,
   underlayColor: TouchableHighlight.propTypes.underlayColor,
 };
