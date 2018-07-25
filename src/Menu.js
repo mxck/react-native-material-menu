@@ -203,8 +203,9 @@ class Menu extends React.Component {
 Menu.propTypes = {
   button: PropTypes.node.isRequired,
   children: PropTypes.node.isRequired,
-  style: ViewPropTypes.style,
   onHidden: PropTypes.func,
+  style: ViewPropTypes.style,
+  testID: ViewPropTypes.testID,
 };
 
 const styles = StyleSheet.create({
