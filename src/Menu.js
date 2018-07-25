@@ -146,7 +146,9 @@ class Menu extends React.Component {
       });
 
       top += this.state.buttonHeight;
-      top = Math.min(dimensions.height - SCREEN_INDENT, top) - MENU_PADDING_VERTICAL * 2;
+      top =
+        Math.min(dimensions.height - SCREEN_INDENT, top) -
+        MENU_PADDING_VERTICAL * 2;
     }
 
     const shadowMenuContainerStyle = {

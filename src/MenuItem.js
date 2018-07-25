@@ -11,7 +11,7 @@ function MenuItem({
   style,
   textStyle,
   underlayColor,
-  testID
+  testID,
 }) {
   return (
     <TouchableHighlight
