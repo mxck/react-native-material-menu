@@ -12,5 +12,6 @@ module.exports = {
     // React
     'react/require-default-props': 'off',
     'react/no-typos': 'off',
+    'react/destructuring-assignment': 'off',
   },
 };

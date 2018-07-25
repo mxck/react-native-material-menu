@@ -25,6 +25,8 @@ const MENU_PADDING_VERTICAL = 8;
 const SCREEN_INDENT = 8;
 
 class Menu extends React.Component {
+  _container = null;
+
   state = {
     menuState: STATES.HIDDEN,
 
@@ -40,8 +42,6 @@ class Menu extends React.Component {
     menuSizeAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
     opacityAnimation: new Animated.Value(0),
   };
-
-  _container = null;
 
   _setContainerRef = ref => {
     this._container = ref;
@@ -119,7 +119,14 @@ class Menu extends React.Component {
   render() {
     const dimensions = Dimensions.get('screen');
 
-    const { menuSizeAnimation } = this.state;
+    const {
+      menuSizeAnimation,
+      menuWidth,
+      menuHeight,
+      buttonWidth,
+      buttonHeight,
+      opacityAnimation,
+    } = this.state;
     const menuSize = {
       width: menuSizeAnimation.x,
       height: menuSizeAnimation.y,
@@ -130,29 +137,27 @@ class Menu extends React.Component {
     const transforms = [];
 
     // Flip by X axis if menu hits right screen border
-    if (left > dimensions.width - this.state.menuWidth - SCREEN_INDENT) {
+    if (left > dimensions.width - menuWidth - SCREEN_INDENT) {
       transforms.push({
         translateX: Animated.multiply(menuSizeAnimation.x, -1),
       });
 
-      left += this.state.buttonWidth;
-      left = Math.min(dimensions.width - SCREEN_INDENT, left);
+      left = Math.min(dimensions.width - SCREEN_INDENT, left + buttonWidth);
     }
 
     // Flip by Y axis if menu hits bottom screen border
-    if (top > dimensions.height - this.state.menuHeight - SCREEN_INDENT) {
+    if (top > dimensions.height - menuHeight - SCREEN_INDENT) {
       transforms.push({
         translateY: Animated.multiply(menuSizeAnimation.y, -1),
       });
 
-      top += this.state.buttonHeight;
       top =
-        Math.min(dimensions.height - SCREEN_INDENT, top) -
+        Math.min(dimensions.height - SCREEN_INDENT, top + buttonHeight) -
         MENU_PADDING_VERTICAL * 2;
     }
 
     const shadowMenuContainerStyle = {
-      opacity: this.state.opacityAnimation,
+      opacity: opacityAnimation,
       transform: transforms,
       left,
       top,
@@ -162,13 +167,11 @@ class Menu extends React.Component {
     const animationStarted = menuState === STATES.ANIMATING;
     const modalVisible = menuState === STATES.SHOWN || animationStarted;
 
+    const { testID, button, style, children } = this.props;
+
     return (
-      <View
-        ref={this._setContainerRef}
-        collapsable={false}
-        testID={this.props.testID}
-      >
-        <View onLayout={this._onButtonLayout}>{this.props.button}</View>
+      <View ref={this._setContainerRef} collapsable={false} testID={testID}>
+        <View onLayout={this._onButtonLayout}>{button}</View>
 
         <Modal
           visible={modalVisible}
@@ -189,13 +192,13 @@ class Menu extends React.Component {
                 style={[
                   styles.shadowMenuContainer,
                   shadowMenuContainerStyle,
-                  this.props.style,
+                  style,
                 ]}
               >
                 <Animated.View
                   style={[styles.menuContainer, animationStarted && menuSize]}
                 >
-                  {this.props.children}
+                  {children}
                 </Animated.View>
               </Animated.View>
             </View>
