@@ -11,7 +11,6 @@ function MenuItem({
   style,
   textStyle,
   underlayColor,
-  testID,
   ...props
 }) {
   return (
@@ -21,7 +20,6 @@ function MenuItem({
       onPress={onPress}
       style={[styles.container, style]}
       underlayColor={underlayColor}
-      testID={testID}
     >
       <Text
         ellipsizeMode={Platform.OS === 'ios' ? 'clip' : 'tail'}
@@ -44,7 +42,6 @@ MenuItem.propTypes = {
   disabledTextColor: PropTypes.string,
   onPress: PropTypes.func,
   style: TouchableHighlight.propTypes.style,
-  testID: Text.propTypes.testID,
   textStyle: Text.propTypes.style,
   underlayColor: TouchableHighlight.propTypes.underlayColor,
 };
