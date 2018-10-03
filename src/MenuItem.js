@@ -12,9 +12,11 @@ function MenuItem({
   textStyle,
   underlayColor,
   testID,
+  ...props
 }) {
   return (
     <TouchableHighlight
+      {...props}
       disabled={disabled}
       onPress={onPress}
       style={[styles.container, style]}
