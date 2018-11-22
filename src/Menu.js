@@ -83,12 +83,6 @@ class Menu extends React.Component {
     this.setState({ buttonWidth: width, buttonHeight: height });
   };
 
-  _onDismiss = () => {
-    if (this.props.onHidden) {
-      this.props.onHidden();
-    }
-  }
-
   show = () => {
     this._container.measureInWindow((x, y) => {
       const top = Math.max(SCREEN_INDENT, y);
@@ -104,12 +98,26 @@ class Menu extends React.Component {
       easing: EASING,
     }).start(() => {
       // Reset state
-      this.setState({
-        menuState: STATES.HIDDEN,
-        menuSizeAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
-        opacityAnimation: new Animated.Value(0),
-      });
+      this.setState(
+        {
+          menuState: STATES.HIDDEN,
+          menuSizeAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
+          opacityAnimation: new Animated.Value(0),
+        },
+        () => {
+          // Invoke onHidden callback if defined
+          if (Platform.OS !== 'ios' && this.props.onHidden) {
+            this.props.onHidden();
+          }
+        },
+      );
     });
+  };
+
+  _onDismiss = () => {
+    if (Platform.OS === 'ios' && this.props.onHidden) {
+      this.props.onHidden();
+    }
   };
 
   render() {
