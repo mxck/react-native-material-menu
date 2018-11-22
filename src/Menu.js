@@ -83,6 +83,12 @@ class Menu extends React.Component {
     this.setState({ buttonWidth: width, buttonHeight: height });
   };
 
+  _onDismiss = () => {
+    if (this.props.onHidden) {
+      this.props.onHidden();
+    }
+  }
+
   show = () => {
     this._container.measureInWindow((x, y) => {
       const top = Math.max(SCREEN_INDENT, y);
@@ -98,19 +104,11 @@ class Menu extends React.Component {
       easing: EASING,
     }).start(() => {
       // Reset state
-      this.setState(
-        {
-          menuState: STATES.HIDDEN,
-          menuSizeAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
-          opacityAnimation: new Animated.Value(0),
-        },
-        () => {
-          // Invoke onHidden callback if defined
-          if (this.props.onHidden) {
-            this.props.onHidden();
-          }
-        },
-      );
+      this.setState({
+        menuState: STATES.HIDDEN,
+        menuSizeAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
+        opacityAnimation: new Animated.Value(0),
+      });
     });
   };
 
@@ -149,8 +147,7 @@ class Menu extends React.Component {
         translateY: Animated.multiply(menuSizeAnimation.y, -1),
       });
 
-      top =
-        Math.min(dimensions.height - SCREEN_INDENT, top + buttonHeight);
+      top = Math.min(dimensions.height - SCREEN_INDENT, top + buttonHeight);
     }
 
     const shadowMenuContainerStyle = {
@@ -181,6 +178,7 @@ class Menu extends React.Component {
             'landscape-right',
           ]}
           transparent
+          onDismiss={this._onDismiss}
         >
           <TouchableWithoutFeedback onPress={this.hide}>
             <View style={StyleSheet.absoluteFill}>
