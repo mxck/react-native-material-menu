@@ -83,6 +83,12 @@ class Menu extends React.Component {
     this.setState({ buttonWidth: width, buttonHeight: height });
   };
 
+  _onDismiss = () => {
+    if (this.props.onHidden) {
+      this.props.onHidden();
+    }
+  };
+
   show = () => {
     this._container.measureInWindow((x, y) => {
       const top = Math.max(SCREEN_INDENT, y);
@@ -112,12 +118,6 @@ class Menu extends React.Component {
         },
       );
     });
-  };
-
-  _onDismiss = () => {
-    if (this.props.onHidden) {
-      this.props.onHidden();
-    }
   };
 
   render() {
