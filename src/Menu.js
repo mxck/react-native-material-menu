@@ -106,12 +106,18 @@ class Menu extends React.Component {
         },
         () => {
           // Invoke onHidden callback if defined
-          if (this.props.onHidden) {
+          if (Platform.OS !== 'ios' && this.props.onHidden) {
             this.props.onHidden();
           }
         },
       );
     });
+  };
+
+  _onDismiss = () => {
+    if (this.props.onHidden) {
+      this.props.onHidden();
+    }
   };
 
   render() {
@@ -149,8 +155,7 @@ class Menu extends React.Component {
         translateY: Animated.multiply(menuSizeAnimation.y, -1),
       });
 
-      top =
-        Math.min(dimensions.height - SCREEN_INDENT, top + buttonHeight);
+      top = Math.min(dimensions.height - SCREEN_INDENT, top + buttonHeight);
     }
 
     const shadowMenuContainerStyle = {
@@ -181,6 +186,7 @@ class Menu extends React.Component {
             'landscape-right',
           ]}
           transparent
+          onDismiss={this._onDismiss}
         >
           <TouchableWithoutFeedback onPress={this.hide}>
             <View style={StyleSheet.absoluteFill}>
