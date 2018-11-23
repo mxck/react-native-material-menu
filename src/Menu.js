@@ -115,7 +115,7 @@ class Menu extends React.Component {
   };
 
   _onDismiss = () => {
-    if (Platform.OS === 'ios' && this.props.onHidden) {
+    if (this.props.onHidden) {
       this.props.onHidden();
     }
   };
