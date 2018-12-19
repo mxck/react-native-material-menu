@@ -19,8 +19,8 @@ const STATES = {
   SHOWN: 'SHOWN',
 };
 
-const ANIMATION_DURATION = 300;
-const EASING = Easing.bezier(0.4, 0, 0.2, 1);
+const ANIMATION_DURATION = 280;
+const EASING = Easing.bezier(0.25, 0.8, 0.25, 1);
 const SCREEN_INDENT = 8;
 
 class Menu extends React.Component {
