@@ -1,7 +1,7 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
-import { StyleSheet, Text, TouchableHighlight, Platform } from 'react-native';
+import { StyleSheet, Text, TouchableNativeFeedback, TouchableHighlight, Platform } from 'react-native';
 
 function MenuItem({
   children,
@@ -13,31 +13,54 @@ function MenuItem({
   underlayColor,
   ...props
 }) {
+  const Touchable = Platform.select({
+    ios: TouchableHighlight,
+    android: TouchableNativeFeedback
+  });
+
+  const newProps = Platform.select({
+    ios: {
+      underlayColor
+    },
+    android: {
+      background: TouchableNativeFeedback.SelectableBackground()
+    }
+  });
+
   return (
-    <TouchableHighlight
+    <Touchable
       {...props}
       disabled={disabled}
       onPress={onPress}
       style={[styles.container, style]}
-      underlayColor={underlayColor}
+      {...newProps}
     >
-      <Text
-        ellipsizeMode={Platform.OS === 'ios' ? 'clip' : 'tail'}
-        numberOfLines={1}
-        style={[
-          styles.title,
-          disabled && { color: disabledTextColor },
-          textStyle,
-        ]}
-      >
-        {children}
-      </Text>
-    </TouchableHighlight>
+      {typeof children === 'string' ? (
+        <Text
+          ellipsizeMode={Platform.OS === 'ios' ? 'clip' : 'tail'}
+          numberOfLines={1}
+          style={[
+            styles.title,
+            disabled && { color: disabledTextColor },
+            textStyle,
+          ]}
+        >
+          {children}
+        </Text>
+      ) : (
+          <View style={[styles.itemsContainer, style, { width }]}>
+            {children}
+          </View>
+      )}
+    </Touchable>
   );
 }
 
 MenuItem.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func
+  ]).isRequired,
   disabled: PropTypes.bool,
   disabledTextColor: PropTypes.string,
   onPress: PropTypes.func,
@@ -58,6 +81,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     maxWidth: 248,
     minWidth: 124,
+  },
+  itemsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    height: 48,
+    maxWidth: 248,
+    minWidth: 124,
+    paddingHorizontal: 16
   },
   title: {
     fontSize: 14,
