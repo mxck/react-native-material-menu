@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Fragment} from 'react';
 
 import PropTypes from 'prop-types';
 import { StyleSheet, Text, TouchableHighlight, Platform } from 'react-native';
@@ -11,6 +11,7 @@ function MenuItem({
   style,
   textStyle,
   underlayColor,
+  icon,
   ...props
 }) {
   return (
@@ -21,6 +22,8 @@ function MenuItem({
       style={[styles.container, style]}
       underlayColor={underlayColor}
     >
+    <Fragment>
+    {icon}
       <Text
         ellipsizeMode={Platform.OS === 'ios' ? 'clip' : 'tail'}
         numberOfLines={1}
@@ -32,6 +35,7 @@ function MenuItem({
       >
         {children}
       </Text>
+    </Fragment>
     </TouchableHighlight>
   );
 }
@@ -55,6 +59,7 @@ MenuItem.defaultProps = {
 const styles = StyleSheet.create({
   container: {
     height: 48,
+    flexDirection:'row',
     justifyContent: 'center',
     maxWidth: 248,
     minWidth: 124,
