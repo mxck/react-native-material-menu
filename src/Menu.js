@@ -188,7 +188,7 @@ class Menu extends React.Component {
           transparent
           onDismiss={this._onDismiss}
         >
-          <TouchableWithoutFeedback onPress={this.hide}>
+          <TouchableWithoutFeedback onPress={this.hide} accessible={false}>
             <View style={StyleSheet.absoluteFill}>
               <Animated.View
                 onLayout={this._onMenuLayout}
