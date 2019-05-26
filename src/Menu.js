@@ -7,6 +7,7 @@ import {
   Easing,
   Modal,
   Platform,
+  StatusBar,
   StyleSheet,
   TouchableWithoutFeedback,
   View,
@@ -121,7 +122,9 @@ class Menu extends React.Component {
   };
 
   render() {
-    const dimensions = Dimensions.get('screen');
+    const dimensions = Dimensions.get('window');
+    const { width: windowWidth } = dimensions;
+    const windowHeight = dimensions.height - (StatusBar.currentHeight || 0);
 
     const {
       menuSizeAnimation,
@@ -141,21 +144,22 @@ class Menu extends React.Component {
     const transforms = [];
 
     // Flip by X axis if menu hits right screen border
-    if (left > dimensions.width - menuWidth - SCREEN_INDENT) {
+    if (left > windowWidth - menuWidth - SCREEN_INDENT) {
       transforms.push({
         translateX: Animated.multiply(menuSizeAnimation.x, -1),
       });
 
-      left = Math.min(dimensions.width - SCREEN_INDENT, left + buttonWidth);
+      left = Math.min(windowWidth - SCREEN_INDENT, left + buttonWidth);
     }
 
     // Flip by Y axis if menu hits bottom screen border
-    if (top > dimensions.height - menuHeight - SCREEN_INDENT) {
+    if (top > windowHeight - menuHeight - SCREEN_INDENT) {
       transforms.push({
         translateY: Animated.multiply(menuSizeAnimation.y, -1),
       });
 
-      top = Math.min(dimensions.height - SCREEN_INDENT, top + buttonHeight);
+      top = windowHeight - SCREEN_INDENT;
+      top = Math.min(windowHeight - SCREEN_INDENT, top + buttonHeight);
     }
 
     const shadowMenuContainerStyle = {
