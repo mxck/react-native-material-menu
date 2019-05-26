@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
 
 import PropTypes from 'prop-types';
+import { StyleSheet, View } from 'react-native';
 
 function MenuDivider({ color }) {
   return <View style={[styles.divider, { borderBottomColor: color }]} />;

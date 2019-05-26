@@ -1,7 +1,7 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
-import { StyleSheet, Text, TouchableHighlight, Platform } from 'react-native';
+import { Platform, StyleSheet, Text, TouchableHighlight } from 'react-native';
 
 function MenuItem({
   children,

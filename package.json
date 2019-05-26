@@ -14,15 +14,25 @@
   ],
   "author": "Maksim Milyutin <mmxckk@gmail.com> (https://github.com/mxck)",
   "license": "MIT",
+  "scripts": {
+    "prettify": "import-sort --write 'src/**/*.js' && prettier --write 'src/**/*.js' && eslint 'src/**/*.js'"
+  },
   "devDependencies": {
-    "babel-eslint": "~8.2.0",
-    "eslint": "~4.19.0",
-    "eslint-config-airbnb": "~17.0.0",
-    "eslint-config-prettier": "~2.9.0",
-    "eslint-plugin-import": "~2.13.0",
-    "eslint-plugin-jsx-a11y": "~6.1.1",
-    "eslint-plugin-react": "~7.10.0",
-    "prettier": "~1.13.7"
+    "babel-eslint": "~10.0.0",
+    "eslint-config-airbnb": "~17.1.0",
+    "eslint-config-prettier": "~4.3.0",
+    "eslint-plugin-import": "~2.17.0",
+    "eslint-plugin-jsx-a11y": "~6.2.0",
+    "eslint-plugin-react": "~7.13.0",
+    "eslint": "~5.16.0",
+    "husky": "~2.3.0",
+    "import-sort-cli": "~6.0.0",
+    "import-sort-parser-babylon": "~6.0.0",
+    "import-sort-parser-typescript": "~6.0.0",
+    "import-sort-style-pietile": "~1.0.0",
+    "import-sort": "~6.0.0",
+    "lint-staged": "~8.1.0",
+    "prettier": "~1.17.0"
   },
   "peerDependencies": {
     "react": ">= 16.3.0",
@@ -30,6 +40,22 @@
   },
   "dependencies": {
     "prop-types": "^15.6.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "import-sort --write",
+      "prettier --write",
+      "git add"
+    ],
+    "README.md": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "bugs": {
     "url": "https://github.com/mxck/react-native-material-menu/issues"
