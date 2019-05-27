@@ -1,7 +1,19 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
-import { Platform, StyleSheet, Text, TouchableHighlight } from 'react-native';
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  TouchableNativeFeedback,
+  View,
+} from 'react-native';
+
+const Touchable = Platform.select({
+  android: TouchableNativeFeedback,
+  default: TouchableHighlight,
+});
 
 function MenuItem({
   children,
@@ -10,29 +22,34 @@ function MenuItem({
   onPress,
   style,
   textStyle,
-  underlayColor,
   ...props
 }) {
+  const touchableProps = Platform.select({
+    android: { background: TouchableNativeFeedback.SelectableBackground() },
+    default: {},
+  });
+
   return (
-    <TouchableHighlight
-      {...props}
+    <Touchable
       disabled={disabled}
       onPress={onPress}
-      style={[styles.container, style]}
-      underlayColor={underlayColor}
+      {...touchableProps}
+      {...props}
     >
-      <Text
-        ellipsizeMode={Platform.OS === 'ios' ? 'clip' : 'tail'}
-        numberOfLines={1}
-        style={[
-          styles.title,
-          disabled && { color: disabledTextColor },
-          textStyle,
-        ]}
-      >
-        {children}
-      </Text>
-    </TouchableHighlight>
+      <View style={[styles.container, style]}>
+        <Text
+          ellipsizeMode={Platform.OS === 'ios' ? 'clip' : 'tail'}
+          numberOfLines={1}
+          style={[
+            styles.title,
+            disabled && { color: disabledTextColor },
+            textStyle,
+          ]}
+        >
+          {children}
+        </Text>
+      </View>
+    </Touchable>
   );
 }
 
