@@ -78,12 +78,6 @@ class Menu extends React.Component {
     );
   };
 
-  // Save button width and height for menu layout
-  _onButtonLayout = e => {
-    const { width, height } = e.nativeEvent.layout;
-    this.setState({ buttonWidth: width, buttonHeight: height });
-  };
-
   _onDismiss = () => {
     if (this.props.onHidden) {
       this.props.onHidden();
@@ -91,10 +85,14 @@ class Menu extends React.Component {
   };
 
   show = () => {
-    this._container.measureInWindow((x, y) => {
-      const top = Math.max(SCREEN_INDENT, y);
-      const left = Math.max(SCREEN_INDENT, x);
-      this.setState({ menuState: STATES.SHOWN, top, left });
+    this._container.measureInWindow((left, top, buttonWidth, buttonHeight) => {
+      this.setState({
+        buttonHeight,
+        buttonWidth,
+        left,
+        menuState: STATES.SHOWN,
+        top,
+      });
     });
   };
 
@@ -150,6 +148,8 @@ class Menu extends React.Component {
       });
 
       left = Math.min(windowWidth - SCREEN_INDENT, left + buttonWidth);
+    } else if (left < SCREEN_INDENT) {
+      left = SCREEN_INDENT;
     }
 
     // Flip by Y axis if menu hits bottom screen border
@@ -160,6 +160,8 @@ class Menu extends React.Component {
 
       top = windowHeight - SCREEN_INDENT;
       top = Math.min(windowHeight - SCREEN_INDENT, top + buttonHeight);
+    } else if (top < SCREEN_INDENT) {
+      top = SCREEN_INDENT;
     }
 
     const shadowMenuContainerStyle = {
@@ -177,7 +179,7 @@ class Menu extends React.Component {
 
     return (
       <View ref={this._setContainerRef} collapsable={false} testID={testID}>
-        <View onLayout={this._onButtonLayout}>{button}</View>
+        <View>{button}</View>
 
         <Modal
           visible={modalVisible}
