@@ -22,12 +22,16 @@ function MenuItem({
   onPress,
   style,
   textStyle,
+  ellipsizeMode,
   ...props
 }) {
   const touchableProps = Platform.select({
     android: { background: TouchableNativeFeedback.SelectableBackground() },
     default: {},
   });
+  
+  let ellipsize = Platform.OS === 'ios' ? 'clip' : 'tail';
+  if(ellipsizeMode) ellipsize = ellipsizeMode;
 
   return (
     <Touchable
@@ -38,7 +42,7 @@ function MenuItem({
     >
       <View style={[styles.container, style]}>
         <Text
-          ellipsizeMode={Platform.OS === 'ios' ? 'clip' : 'tail'}
+          ellipsizeMode={ellipsizeMode}
           numberOfLines={1}
           style={[
             styles.title,
