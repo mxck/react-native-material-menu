@@ -42,7 +42,7 @@ function MenuItem({
     >
       <View style={[styles.container, style]}>
         <Text
-          ellipsizeMode={ellipsizeMode}
+          ellipsizeMode={ellipsize}
           numberOfLines={1}
           style={[
             styles.title,
