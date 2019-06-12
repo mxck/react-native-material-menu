@@ -1,6 +1,7 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
+
 import {
   Platform,
   StyleSheet,
@@ -22,6 +23,7 @@ function MenuItem({
   onPress,
   style,
   textStyle,
+  ellipsizeMode,
   ...props
 }) {
   const touchableProps = Platform.select({
@@ -38,7 +40,7 @@ function MenuItem({
     >
       <View style={[styles.container, style]}>
         <Text
-          ellipsizeMode={Platform.OS === 'ios' ? 'clip' : 'tail'}
+          ellipsizeMode={ellipsizeMode}
           numberOfLines={1}
           style={[
             styles.title,
@@ -57,6 +59,7 @@ MenuItem.propTypes = {
   children: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   disabledTextColor: PropTypes.string,
+  ellipsizeMode: PropTypes.string,
   onPress: PropTypes.func,
   style: TouchableHighlight.propTypes.style,
   textStyle: Text.propTypes.style,
@@ -67,6 +70,7 @@ MenuItem.defaultProps = {
   disabled: false,
   disabledTextColor: '#BDBDBD',
   underlayColor: '#E0E0E0',
+  ellipsizeMode: Platform.OS === 'ios' ? 'clip' : 'tail',
 };
 
 const styles = StyleSheet.create({
