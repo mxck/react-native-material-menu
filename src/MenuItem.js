@@ -55,7 +55,7 @@ function MenuItem({
 }
 
 MenuItem.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   disabled: PropTypes.bool,
   disabledTextColor: PropTypes.string,
   ellipsizeMode: PropTypes.string,
