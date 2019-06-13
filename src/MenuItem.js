@@ -67,9 +67,9 @@ MenuItem.propTypes = {
 
 MenuItem.defaultProps = {
   disabled: false,
-  disabledTextColor: '#BDBDBD',
+  disabledTextColor: '#bdbdbd',
   ellipsizeMode: Platform.OS === 'ios' ? 'clip' : 'tail',
-  underlayColor: '#E0E0E0',
+  underlayColor: '#e0e0e0',
 };
 
 const styles = StyleSheet.create({
