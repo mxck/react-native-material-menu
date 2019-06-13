@@ -10,13 +10,15 @@ Native.
 
 ```bash
 npm install --save react-native-material-menu
+```
 
 or
 
+```bash
 yarn add react-native-material-menu
 ```
 
-## Usage example
+## Usage example ([expo demo](https://snack.expo.io/@mxck/react-native-material-menu-demo))
 
 ```jsx
 import React from 'react';
@@ -95,7 +97,7 @@ export default App;
 | textStyle         | Text style                   |  Style | -                                |
 | underlayColor     | Pressed color                | String | `'#e0e0e0'`                      |
 
-> **Children** must be based on [`<Text>`][text component] component (like text itself or [react-native-vector-icons]) otherwise you may get an error on a real device.
+> **Children** must be based on [`<Text>`][text component] component (like **text** itself, [react-native-vector-icons] or [expo icons]) otherwise you may get an error on a real device.
 
 ## MenuDivider
 
@@ -111,3 +113,4 @@ MIT License. © Maksim Milyutin 2017-2019
 
 [text component]: https://facebook.github.io/react-native/docs/text.html
 [react-native-vector-icons]: https://github.com/oblador/react-native-vector-icons
+[expo icons]: https://docs.expo.io/versions/latest/guides/icons/
