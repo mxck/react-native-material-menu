@@ -84,16 +84,16 @@ export default App;
 
 ### Properties
 
-| name              | description                   |   type | default                      |
-| :---------------- | :---------------------------- | -----: | :--------------------------- |
-| children          | Rendered children (required). |   Node | -                            |
-| disabled          | Disabled flag                 |   Bool | false                        |
-| disabledTextColor | Disabled text color           | String | "#BDBDBD"                    |
-| ellipsizeMode     | Custom ellipsizeMode          | String | iOS: "clip", Android: "tail" |
-| onPress           | Called function on press      |   Func | -                            |
-| style             | Container style               |  Style | -                            |
-| textStyle         | Text style                    |  Style | -                            |
-| underlayColor     | Pressed color                 | String | "#E0E0E0"                    |
+| name              | description                  |   type | default                      |
+| :---------------- | :--------------------------- | -----: | :--------------------------- |
+| children          | Rendered children (required) |   Node | -                            |
+| disabled          | Disabled flag                |   Bool | false                        |
+| disabledTextColor | Disabled text color          | String | "#BDBDBD"                    |
+| ellipsizeMode     | Custom ellipsizeMode         | String | iOS: "clip", Android: "tail" |
+| onPress           | Called function on press     |   Func | -                            |
+| style             | Container style              |  Style | -                            |
+| textStyle         | Text style                   |  Style | -                            |
+| underlayColor     | Pressed color                | String | "#E0E0E0"                    |
 
 > **Children** must be based on [`<Text>`][text component] component (like text itself or [react-native-vector-icons]) otherwise you may get an error on a real device.
 
