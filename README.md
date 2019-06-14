@@ -97,7 +97,7 @@ export default App;
 | textStyle         | Text style                   |  Style | -                                |
 | underlayColor     | Pressed color                | String | `'#e0e0e0'`                      |
 
-> **Children** must be based on [`<Text>`][text component] component (like **text** itself, [react-native-vector-icons] or [expo icons]) otherwise you may get an error on a real device.
+> **Children** must be based on [`<Text>`][text component] component (like **text** itself, strings, [react-native-vector-icons] or [expo icons]) otherwise you may get an error on a real device.
 
 ## MenuDivider
 
