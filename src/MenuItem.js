@@ -25,10 +25,10 @@ function MenuItem({
   textStyle,
   ...props
 }) {
-  const touchableProps = Platform.select({
-    android: { background: Platform.OS === "android"? TouchableNativeFeedback.SelectableBackground() : {} },
-    default: {},
-  });
+  const touchableProps =
+    Platform.OS === 'android'
+      ? { background: TouchableNativeFeedback.SelectableBackground() }
+      : {};
 
   return (
     <Touchable
