@@ -123,6 +123,11 @@ class Menu extends React.Component {
     });
   };
 
+  // @@ TODO: Rework this
+  _hide = () => {
+    this.hide();
+  };
+
   render() {
     const dimensions = Dimensions.get('window');
     const { width: windowWidth } = dimensions;
@@ -187,7 +192,7 @@ class Menu extends React.Component {
 
         <Modal
           visible={modalVisible}
-          onRequestClose={this.hide}
+          onRequestClose={this._hide}
           supportedOrientations={[
             'portrait',
             'portrait-upside-down',
@@ -198,7 +203,7 @@ class Menu extends React.Component {
           transparent
           onDismiss={this._onDismiss}
         >
-          <TouchableWithoutFeedback onPress={this.hide} accessible={false}>
+          <TouchableWithoutFeedback onPress={this._hide} accessible={false}>
             <View style={StyleSheet.absoluteFill}>
               <Animated.View
                 onLayout={this._onMenuLayout}
