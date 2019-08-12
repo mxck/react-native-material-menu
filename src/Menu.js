@@ -89,7 +89,7 @@ class Menu extends React.Component {
       this.setState({
         buttonHeight,
         buttonWidth,
-        left,
+        left: (Platform.OS === 'web') ? 0 : left,
         menuState: STATES.SHOWN,
         top,
       });
