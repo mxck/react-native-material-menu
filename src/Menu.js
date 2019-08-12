@@ -189,39 +189,40 @@ class Menu extends React.Component {
     return (
       <View ref={this._setContainerRef} collapsable={false} testID={testID}>
         <View>{button}</View>
-
-        <Modal
-          visible={modalVisible}
-          onRequestClose={this._hide}
-          supportedOrientations={[
-            'portrait',
-            'portrait-upside-down',
-            'landscape',
-            'landscape-left',
-            'landscape-right',
-          ]}
-          transparent
-          onDismiss={this._onDismiss}
-        >
-          <TouchableWithoutFeedback onPress={this._hide} accessible={false}>
-            <View style={StyleSheet.absoluteFill}>
-              <Animated.View
-                onLayout={this._onMenuLayout}
-                style={[
-                  styles.shadowMenuContainer,
-                  shadowMenuContainerStyle,
-                  style,
-                ]}
-              >
+        {((Platform.OS !== 'web') || modalVisible) && (
+          <Modal
+            visible={modalVisible}
+            onRequestClose={this._hide}
+            supportedOrientations={[
+              'portrait',
+              'portrait-upside-down',
+              'landscape',
+              'landscape-left',
+              'landscape-right',
+            ]}
+            transparent
+            onDismiss={this._onDismiss}
+          >
+            <TouchableWithoutFeedback onPress={this._hide} accessible={false}>
+              <View style={StyleSheet.absoluteFill}>
                 <Animated.View
-                  style={[styles.menuContainer, animationStarted && menuSize]}
+                  onLayout={this._onMenuLayout}
+                  style={[
+                    styles.shadowMenuContainer,
+                    shadowMenuContainerStyle,
+                    style,
+                  ]}
                 >
-                  {children}
+                  <Animated.View
+                    style={[styles.menuContainer, animationStarted && menuSize]}
+                  >
+                    {children}
+                  </Animated.View>
                 </Animated.View>
-              </Animated.View>
-            </View>
-          </TouchableWithoutFeedback>
-        </Modal>
+              </View>
+            </TouchableWithoutFeedback>
+          </Modal>
+        )}
       </View>
     );
   }
