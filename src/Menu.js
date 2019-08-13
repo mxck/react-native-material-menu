@@ -90,8 +90,8 @@ class Menu extends React.Component {
         buttonHeight,
         buttonWidth,
         left: (Platform.OS === 'web') ? 0 : left,
+        top: (Platform.OS === 'web') ? 0 : top,
         menuState: STATES.SHOWN,
-        top,
       });
     });
   };
