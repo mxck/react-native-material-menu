@@ -186,9 +186,11 @@ class Menu extends React.Component {
 
     const { testID, button, style, children } = this.props;
 
+    const ButtonComponent = (typeof button === 'function') ? button : null;
+
     return (
       <View ref={this._setContainerRef} collapsable={false} testID={testID}>
-        <View>{button}</View>
+        <View> { <ButtonComponent /> || button }</View>
 
         <Modal
           visible={modalVisible}
@@ -228,7 +230,7 @@ class Menu extends React.Component {
 }
 
 Menu.propTypes = {
-  button: PropTypes.node.isRequired,
+  button: PropTypes.oneOf([PropTypes.node, PropTypes.func]).isRequired,
   children: PropTypes.node.isRequired,
   onHidden: PropTypes.func,
   style: ViewPropTypes.style,
