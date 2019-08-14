@@ -190,7 +190,8 @@ class Menu extends React.Component {
 
     return (
       <View ref={this._setContainerRef} collapsable={false} testID={testID}>
-        <View> { <ButtonComponent /> || button }</View>
+
+        <View>{(!!ButtonComponent) ? <ButtonComponent /> : button}</View>
 
         <Modal
           visible={modalVisible}
@@ -230,7 +231,10 @@ class Menu extends React.Component {
 }
 
 Menu.propTypes = {
-  button: PropTypes.oneOf([PropTypes.node, PropTypes.func]).isRequired,
+  button: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.elementType,
+  ]).isRequired,
   children: PropTypes.node.isRequired,
   onHidden: PropTypes.func,
   style: ViewPropTypes.style,
