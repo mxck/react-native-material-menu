@@ -1,6 +1,7 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
+
 import {
   Animated,
   Dimensions,
@@ -12,6 +13,7 @@ import {
   TouchableWithoutFeedback,
   View,
   ViewPropTypes,
+  I18nManager,
 } from 'react-native';
 
 const STATES = {
@@ -179,6 +181,11 @@ class Menu extends React.Component {
       left,
       top,
     };
+
+    if (I18nManager.isRTL) {
+      shadowMenuContainerStyle.right = shadowMenuContainerStyle.left;
+      shadowMenuContainerStyle.left = undefined;
+    }
 
     const { menuState } = this.state;
     const animationStarted = menuState === STATES.ANIMATING;
