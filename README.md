@@ -107,9 +107,6 @@ export default App;
 | :---- | :---------- | -----: | :------------------- |
 | color | Line color  | String | `'rgba(0,0,0,0.12)'` |
 
-## RTL Support
-Checkout this [demo](https://snack.expo.io/@yaron1m/react-native-material-menu-rtl-demo) (make sure you open it in an RTL device).
-
 ## License
 
 MIT License. © Maksim Milyutin 2017-2019
