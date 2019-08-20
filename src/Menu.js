@@ -228,12 +228,12 @@ class Menu extends React.Component {
 }
 
 Menu.propTypes = {
+  animationDuration: PropTypes.number,
   button: PropTypes.node.isRequired,
   children: PropTypes.node.isRequired,
   onHidden: PropTypes.func,
   style: ViewPropTypes.style,
   testID: ViewPropTypes.testID,
-  animationDuration: PropTypes.number,
 };
 
 Menu.defaultProps = {
