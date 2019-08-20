@@ -8,14 +8,16 @@ Native.
 
 ## Install
 
-```bash
-npm install --save react-native-material-menu
+Using yarn
+
+```sh
+yarn add react-native-material-menu
 ```
 
-or
+or using npm
 
-```bash
-yarn add react-native-material-menu
+```sh
+npm install --save react-native-material-menu
 ```
 
 ## Usage example ([expo demo](https://snack.expo.io/@mxck/react-native-material-menu-demo))
@@ -107,6 +109,10 @@ export default App;
 | name  | description |   type | default              |
 | :---- | :---------- | -----: | :------------------- |
 | color | Line color  | String | `'rgba(0,0,0,0.12)'` |
+
+## Pietile native kit
+
+Also take a look at other our components for react-native - [pietile-native-kit](https://github.com/pietile/pietile-native-kit)
 
 ## License
 
