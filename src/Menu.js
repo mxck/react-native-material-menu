@@ -1,6 +1,7 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
+
 import {
   Animated,
   Dimensions,
@@ -20,11 +21,12 @@ const STATES = {
   SHOWN: 'SHOWN',
 };
 
-const ANIMATION_DURATION = 300;
 const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 const SCREEN_INDENT = 8;
 
 class Menu extends React.Component {
+  ANIMATION_DURATION = this.props.animationDuration || 300;
+
   _container = null;
 
   state = {
@@ -65,12 +67,12 @@ class Menu extends React.Component {
         Animated.parallel([
           Animated.timing(this.state.menuSizeAnimation, {
             toValue: { x: width, y: height },
-            duration: ANIMATION_DURATION,
+            duration: this.ANIMATION_DURATION,
             easing: EASING,
           }),
           Animated.timing(this.state.opacityAnimation, {
             toValue: 1,
-            duration: ANIMATION_DURATION,
+            duration: this.ANIMATION_DURATION,
             easing: EASING,
           }),
         ]).start();
@@ -99,7 +101,7 @@ class Menu extends React.Component {
   hide = onHidden => {
     Animated.timing(this.state.opacityAnimation, {
       toValue: 0,
-      duration: ANIMATION_DURATION,
+      duration: this.ANIMATION_DURATION,
       easing: EASING,
     }).start(() => {
       // Reset state
@@ -233,6 +235,7 @@ Menu.propTypes = {
   onHidden: PropTypes.func,
   style: ViewPropTypes.style,
   testID: ViewPropTypes.testID,
+  animationDuration: PropTypes.number,
 };
 
 const styles = StyleSheet.create({
