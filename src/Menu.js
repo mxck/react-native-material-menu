@@ -151,34 +151,19 @@ class Menu extends React.Component {
     // Adjust position of menu
     let { left, top } = this.state;
     const transforms = [];
+    const rtl = I18nManager.isRTL;
 
-    if (I18nManager.isRTL) {
-      if (left < SCREEN_INDENT) {
-        // If menu is on left side of the screen leave animation to go right
-        left = SCREEN_INDENT;
-      } else {
-        // Otherwise - we need to flip the animation to go left
-        transforms.push({
-          translateX: Animated.multiply(menuSizeAnimation.x, -1),
-        });
-        left = left + buttonWidth;
+    if (
+      (rtl && left + buttonWidth - menuWidth > SCREEN_INDENT) ||
+      (!rtl && left + menuWidth > windowWidth - SCREEN_INDENT)
+    ) {
+      transforms.push({
+        translateX: Animated.multiply(menuSizeAnimation.x, -1),
+      });
 
-        // If menu hitting the right corner just fix the location
-        if (left > windowWidth - menuWidth - SCREEN_INDENT) {
-          left = Math.min(windowWidth - SCREEN_INDENT, left + buttonWidth);
-        }
-      }
-    } else {
-      // Flip by X axis if menu hits right screen border
-      if (left > windowWidth - menuWidth - SCREEN_INDENT) {
-        transforms.push({
-          translateX: Animated.multiply(menuSizeAnimation.x, -1),
-        });
-
-        left = Math.min(windowWidth - SCREEN_INDENT, left + buttonWidth);
-      } else if (left < SCREEN_INDENT) {
-        left = SCREEN_INDENT;
-      }
+      left = Math.min(windowWidth - SCREEN_INDENT, left + buttonWidth);
+    } else if (left < SCREEN_INDENT) {
+      left = SCREEN_INDENT;
     }
 
     // Flip by Y axis if menu hits bottom screen border
@@ -200,7 +185,7 @@ class Menu extends React.Component {
       top,
     };
 
-    if (I18nManager.isRTL) {
+    if (rtl) {
       shadowMenuContainerStyle.right = shadowMenuContainerStyle.left;
       shadowMenuContainerStyle.left = undefined;
     }
