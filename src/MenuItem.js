@@ -1,6 +1,7 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
+
 import {
   Platform,
   StyleSheet,
@@ -83,6 +84,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '400',
     paddingHorizontal: 16,
+    textAlign: 'left',
   },
 });
 
