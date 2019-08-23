@@ -131,6 +131,8 @@ class Menu extends React.Component {
   };
 
   render() {
+    const { isRTL } = I18nManager;
+
     const dimensions = Dimensions.get('window');
     const { width: windowWidth } = dimensions;
     const windowHeight = dimensions.height - (StatusBar.currentHeight || 0);
@@ -151,11 +153,10 @@ class Menu extends React.Component {
     // Adjust position of menu
     let { left, top } = this.state;
     const transforms = [];
-    const rtl = I18nManager.isRTL;
 
     if (
-      (rtl && left + buttonWidth - menuWidth > SCREEN_INDENT) ||
-      (!rtl && left + menuWidth > windowWidth - SCREEN_INDENT)
+      (isRTL && left + buttonWidth - menuWidth > SCREEN_INDENT) ||
+      (!isRTL && left + menuWidth > windowWidth - SCREEN_INDENT)
     ) {
       transforms.push({
         translateX: Animated.multiply(menuSizeAnimation.x, -1),
@@ -183,12 +184,10 @@ class Menu extends React.Component {
       transform: transforms,
       left,
       top,
-    };
 
-    if (rtl) {
-      shadowMenuContainerStyle.right = shadowMenuContainerStyle.left;
-      shadowMenuContainerStyle.left = undefined;
-    }
+      // Switch left to right for rtl devices
+      ...(isRTL ? { right: left } : { left }),
+    };
 
     const { menuState } = this.state;
     const animationStarted = menuState === STATES.ANIMATING;
