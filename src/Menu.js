@@ -182,7 +182,6 @@ class Menu extends React.Component {
     const shadowMenuContainerStyle = {
       opacity: opacityAnimation,
       transform: transforms,
-      left,
       top,
 
       // Switch left to right for rtl devices
