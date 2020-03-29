@@ -1,7 +1,5 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
-
 import {
   Animated,
   Dimensions,
@@ -12,7 +10,6 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
-  ViewPropTypes,
   I18nManager,
 } from 'react-native';
 
@@ -233,15 +230,6 @@ class Menu extends React.Component {
     );
   }
 }
-
-Menu.propTypes = {
-  animationDuration: PropTypes.number,
-  button: PropTypes.node.isRequired,
-  children: PropTypes.node.isRequired,
-  onHidden: PropTypes.func,
-  style: ViewPropTypes.style,
-  testID: ViewPropTypes.testID,
-};
 
 Menu.defaultProps = {
   animationDuration: 300,

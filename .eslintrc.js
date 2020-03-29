@@ -10,8 +10,9 @@ module.exports = {
     'import/no-unresolved': 'off', // peer dependecies
 
     // React
-    'react/require-default-props': 'off',
-    'react/no-typos': 'off',
     'react/destructuring-assignment': 'off',
+    'react/no-typos': 'off',
+    'react/prop-types': 'off',
+    'react/require-default-props': 'off',
   },
 };

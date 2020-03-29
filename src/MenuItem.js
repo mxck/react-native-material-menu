@@ -1,7 +1,5 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
-
 import {
   Platform,
   StyleSheet,
@@ -54,17 +52,6 @@ function MenuItem({
     </Touchable>
   );
 }
-
-MenuItem.propTypes = {
-  children: PropTypes.node.isRequired,
-  disabled: PropTypes.bool,
-  disabledTextColor: PropTypes.string,
-  ellipsizeMode: PropTypes.string,
-  onPress: PropTypes.func,
-  style: TouchableHighlight.propTypes.style,
-  textStyle: Text.propTypes.style,
-  underlayColor: TouchableHighlight.propTypes.underlayColor,
-};
 
 MenuItem.defaultProps = {
   disabled: false,

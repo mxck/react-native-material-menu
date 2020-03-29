@@ -1,6 +1,5 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
 
 function MenuDivider({ color }) {
@@ -9,10 +8,6 @@ function MenuDivider({ color }) {
 
 MenuDivider.defaultProps = {
   color: 'rgba(0,0,0,0.12)',
-};
-
-MenuDivider.propTypes = {
-  color: PropTypes.string,
 };
 
 const styles = StyleSheet.create({
