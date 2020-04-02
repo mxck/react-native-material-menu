@@ -75,7 +75,7 @@ class Menu extends React.Component {
             toValue: 1,
             duration: this.props.animationDuration,
             easing: EASING,
-            useNativeDriver: true,
+            useNativeDriver: false,
           }),
         ]).start();
       },
@@ -105,7 +105,7 @@ class Menu extends React.Component {
       toValue: 0,
       duration: this.props.animationDuration,
       easing: EASING,
-      useNativeDriver: true,
+      useNativeDriver: false,
     }).start(() => {
       // Reset state
       this.setState(
