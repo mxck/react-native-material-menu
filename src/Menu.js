@@ -4,13 +4,13 @@ import {
   Animated,
   Dimensions,
   Easing,
+  I18nManager,
   Modal,
   Platform,
   StatusBar,
   StyleSheet,
   TouchableWithoutFeedback,
   View,
-  I18nManager,
 } from 'react-native';
 
 const STATES = {
@@ -65,11 +65,13 @@ class Menu extends React.Component {
             toValue: { x: width, y: height },
             duration: this.props.animationDuration,
             easing: EASING,
+            useNativeDriver: false,
           }),
           Animated.timing(this.state.opacityAnimation, {
             toValue: 1,
             duration: this.props.animationDuration,
             easing: EASING,
+            useNativeDriver: true,
           }),
         ]).start();
       },
@@ -99,6 +101,7 @@ class Menu extends React.Component {
       toValue: 0,
       duration: this.props.animationDuration,
       easing: EASING,
+      useNativeDriver: true,
     }).start(() => {
       // Reset state
       this.setState(
