@@ -25,28 +25,32 @@ const SCREEN_INDENT = 8;
 class Menu extends React.Component {
   _container = null;
 
-  state = {
-    menuState: STATES.HIDDEN,
+  constructor(props) {
+    super(props);
 
-    top: 0,
-    left: 0,
+    this.state = {
+      menuState: STATES.HIDDEN,
 
-    menuWidth: 0,
-    menuHeight: 0,
+      top: 0,
+      left: 0,
 
-    buttonWidth: 0,
-    buttonHeight: 0,
+      menuWidth: 0,
+      menuHeight: 0,
 
-    menuSizeAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
-    opacityAnimation: new Animated.Value(0),
-  };
+      buttonWidth: 0,
+      buttonHeight: 0,
 
-  _setContainerRef = ref => {
+      menuSizeAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
+      opacityAnimation: new Animated.Value(0),
+    };
+  }
+
+  _setContainerRef = (ref) => {
     this._container = ref;
   };
 
   // Start menu animation
-  _onMenuLayout = e => {
+  _onMenuLayout = (e) => {
     if (this.state.menuState === STATES.ANIMATING) {
       return;
     }
@@ -96,7 +100,7 @@ class Menu extends React.Component {
     });
   };
 
-  hide = onHidden => {
+  hide = (onHidden) => {
     Animated.timing(this.state.opacityAnimation, {
       toValue: 0,
       duration: this.props.animationDuration,
