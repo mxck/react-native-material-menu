@@ -120,7 +120,7 @@ class Menu extends React.Component {
           }
 
           // Invoke onHidden callback if defined
-          if (Platform.OS !== 'ios' && this.props.onHidden) {
+          if (this.props.onHidden) {
             this.props.onHidden();
           }
         },
