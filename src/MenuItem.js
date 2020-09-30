@@ -9,10 +9,10 @@ import {
   View,
 } from 'react-native';
 
-const Touchable = Platform.select({
-  android: TouchableNativeFeedback,
-  default: TouchableHighlight,
-});
+const Touchable =
+  Platform.OS === 'android' && Platform.Version >= 21
+    ? TouchableNativeFeedback
+    : TouchableHighlight;
 
 function MenuItem({
   children,
@@ -25,7 +25,7 @@ function MenuItem({
   ...props
 }) {
   const touchableProps =
-    Platform.OS === 'android'
+    Platform.OS === 'android' && Platform.Version >= 21
       ? { background: TouchableNativeFeedback.SelectableBackground() }
       : {};
 
