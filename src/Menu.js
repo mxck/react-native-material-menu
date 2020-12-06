@@ -82,12 +82,6 @@ class Menu extends React.Component {
     );
   };
 
-  _onDismiss = () => {
-    if (this.props.onHidden) {
-      this.props.onHidden();
-    }
-  };
-
   show = () => {
     this._container.measureInWindow((left, top, buttonWidth, buttonHeight) => {
       this.setState({
@@ -120,7 +114,7 @@ class Menu extends React.Component {
           }
 
           // Invoke onHidden callback if defined
-          if (Platform.OS !== 'ios' && this.props.onHidden) {
+          if (this.props.onHidden) {
             this.props.onHidden();
           }
         },
@@ -212,7 +206,6 @@ class Menu extends React.Component {
             'landscape-right',
           ]}
           transparent
-          onDismiss={this._onDismiss}
         >
           <TouchableWithoutFeedback onPress={this._hide} accessible={false}>
             <View style={StyleSheet.absoluteFill}>
