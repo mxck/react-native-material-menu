@@ -51,7 +51,7 @@ class Menu extends React.Component {
 
   // Start menu animation
   _onMenuLayout = (e) => {
-    if ([STATES.HIDDEN, STATES.ANIMATING].includes(this.state.menuState)) {
+    if (this.state.menuState !== STATES.SHOWN) {
       return;
     }
 
