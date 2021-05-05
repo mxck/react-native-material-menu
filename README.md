@@ -70,13 +70,16 @@ export default App;
 
 ### Properties
 
-| name              | description                            |     type | default |
-| :---------------- | :------------------------------------- | -------: | :------ |
-| children          | Components rendered in menu (required) |     Node | -       |
-| button            | Button component (required)            |     Node | -       |
-| style             | Menu style                             |    Style | -       |
-| onHidden          | Callback when menu has become hidden   | Function | -       |
-| animationDuration | Changes show() and hide() duration     |   Number | 300     |
+| name              | description                            |     type | default           |
+| :---------------- | :------------------------------------- | -------: | :---------------- |
+| children          | Components rendered in menu (required) |     Node | -                 |
+| button            | Button component (required)            |     Node | -                 |
+| style             | Menu style                             |    Style | -                 |
+| onHidden          | Callback when menu has become hidden   | Function | -                 |
+| animationDuration | Changes show() and hide() duration     |   Number | 300               |
+| offsetX           | Menu position horizontal offset        |   Number | 0                 |
+| offsetY           | Menu position vertical offset          |   Number | 0                 |
+| isRTL             | Defines if menu is RTL                 |  Boolean | I18nManager.isRTL |
 
 ### Methods
 

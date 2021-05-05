@@ -128,7 +128,15 @@ class Menu extends React.Component {
   };
 
   render() {
-    const { isRTL } = I18nManager;
+    const {
+      testID,
+      button,
+      style,
+      children,
+      offsetX,
+      offsetY,
+      isRTL,
+    } = this.props;
 
     const dimensions = Dimensions.get('window');
     const { width: windowWidth } = dimensions;
@@ -179,17 +187,15 @@ class Menu extends React.Component {
     const shadowMenuContainerStyle = {
       opacity: opacityAnimation,
       transform: transforms,
-      top,
+      top: top + offsetY,
 
       // Switch left to right for rtl devices
-      ...(isRTL ? { right: left } : { left }),
+      ...(isRTL ? { right: left + offsetX } : { left: left + offsetX }),
     };
 
     const { menuState } = this.state;
     const animationStarted = menuState === STATES.ANIMATING;
     const modalVisible = menuState === STATES.SHOWN || animationStarted;
-
-    const { testID, button, style, children } = this.props;
 
     return (
       <View ref={this._setContainerRef} collapsable={false} testID={testID}>
@@ -233,6 +239,9 @@ class Menu extends React.Component {
 
 Menu.defaultProps = {
   animationDuration: 300,
+  offsetX: 0,
+  offsetY: 0,
+  isRTL: I18nManager.isRTL,
 };
 
 const styles = StyleSheet.create({
