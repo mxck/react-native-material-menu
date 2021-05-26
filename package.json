@@ -15,45 +15,14 @@
   "author": "Maksim Milyutin <mmxckk@gmail.com> (https://github.com/mxck)",
   "license": "MIT",
   "scripts": {
-    "prettify": "import-sort --write 'src/**/*.js' && prettier --write 'src/**/*.js' && eslint 'src/**/*.js'"
+    "prettify": "prettier --write 'src/**/*.js'"
   },
   "devDependencies": {
-    "babel-eslint": "~10.1.0",
-    "eslint": "~7.15.0",
-    "eslint-config-airbnb": "~18.2.1",
-    "eslint-config-prettier": "~7.0.0",
-    "eslint-plugin-import": "~2.22.1",
-    "eslint-plugin-jsx-a11y": "~6.4.1",
-    "eslint-plugin-react": "~7.21.0",
-    "eslint-plugin-react-hooks": "~4.2.0",
-    "husky": "~4.3.0",
-    "import-sort": "~6.0.0",
-    "import-sort-cli": "~6.0.0",
-    "import-sort-parser-babylon": "~6.0.0",
-    "import-sort-parser-typescript": "~6.0.0",
-    "import-sort-style-pietile": "~1.2.0",
-    "lint-staged": "~10.5.0",
-    "prettier": "~2.2.0"
+    "prettier": "~2.3.0"
   },
   "peerDependencies": {
     "react": ">= 16.3.0",
     "react-native": ">= 0.54.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx}": [
-      "import-sort --write",
-      "prettier --write",
-      "git add"
-    ],
-    "README.md": [
-      "prettier --write",
-      "git add"
-    ]
   },
   "bugs": {
     "url": "https://github.com/mxck/react-native-material-menu/issues"
