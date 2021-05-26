@@ -211,15 +211,9 @@ class Menu extends React.Component {
             <View style={StyleSheet.absoluteFill}>
               <Animated.View
                 onLayout={this._onMenuLayout}
-                style={[
-                  styles.shadowMenuContainer,
-                  shadowMenuContainerStyle,
-                  style,
-                ]}
+                style={[styles.shadowMenuContainer, shadowMenuContainerStyle, style]}
               >
-                <Animated.View
-                  style={[styles.menuContainer, animationStarted && menuSize]}
-                >
+                <Animated.View style={[styles.menuContainer, animationStarted && menuSize]}>
                   {children}
                 </Animated.View>
               </Animated.View>
