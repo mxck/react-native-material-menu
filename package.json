@@ -2,7 +2,11 @@
   "name": "react-native-material-menu",
   "version": "1.2.0",
   "description": "Material Menu for React Native",
-  "main": "src/index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*"
+  ],
   "keywords": [
     "react-native",
     "react",
@@ -15,9 +19,15 @@
   "author": "Maksim Milyutin <mmxckk@gmail.com> (https://github.com/mxck)",
   "license": "MIT",
   "scripts": {
+    "build": "tsc --project ./tsconfig.json",
     "prettify": "prettier --write 'src/**/*.js'"
   },
+  "dependencies": {
+    "@types/react-native": "^0.64.7",
+    "typescript": "4.2.4"
+  },
   "devDependencies": {
+    "@types/react": "^17.0.8",
     "prettier": "~2.3.0"
   },
   "peerDependencies": {
