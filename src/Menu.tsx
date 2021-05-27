@@ -22,7 +22,7 @@ const STATES = {
 const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 const SCREEN_INDENT = 8;
 
-class Menu extends React.Component {
+export class Menu extends React.Component {
   _container = null;
 
   constructor(props) {
@@ -253,5 +253,3 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
 });
-
-export default Menu;
