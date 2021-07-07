@@ -11,6 +11,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
+  ScrollView,
 } from 'react-native';
 
 const STATES = {
@@ -220,7 +221,9 @@ class Menu extends React.Component {
                 <Animated.View
                   style={[styles.menuContainer, animationStarted && menuSize]}
                 >
-                  {children}
+                  <ScrollView>
+                    {children}
+                  </ScrollView>
                 </Animated.View>
               </Animated.View>
             </View>
