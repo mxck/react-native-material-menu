@@ -22,6 +22,7 @@ export interface MenuProps {
   onHidden?(): void;
   animationDuration?: number;
   testID?: string;
+  open?: boolean;
 }
 
 enum States {
@@ -70,6 +71,26 @@ export class Menu extends React.Component<MenuProps, State> {
       menuSizeAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
       opacityAnimation: new Animated.Value(0),
     };
+  }
+
+  componentDidMount() {
+    if (!this.props.open) {
+      return;
+    }
+
+    this.show();
+  }
+
+  componentDidUpdate(prevProps: MenuProps) {
+    if (prevProps === this.props.open) {
+      return;
+    }
+
+    if (this.props.open) {
+      this.show();
+    } else {
+      this.hide();
+    }
   }
 
   _setContainerRef = (ref: View) => {
