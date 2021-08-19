@@ -30,21 +30,12 @@ function MenuItem({
       : {};
 
   return (
-    <Touchable
-      disabled={disabled}
-      onPress={onPress}
-      {...touchableProps}
-      {...props}
-    >
+    <Touchable disabled={disabled} onPress={onPress} {...touchableProps} {...props}>
       <View style={[styles.container, style]}>
         <Text
           ellipsizeMode={ellipsizeMode}
           numberOfLines={1}
-          style={[
-            styles.title,
-            disabled && { color: disabledTextColor },
-            textStyle,
-          ]}
+          style={[styles.title, disabled && { color: disabledTextColor }, textStyle]}
         >
           {children}
         </Text>

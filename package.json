@@ -2,7 +2,7 @@
   "name": "react-native-material-menu",
   "version": "1.2.0",
   "description": "Material Menu for React Native",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "keywords": [
     "react-native",
     "react",
@@ -15,12 +15,14 @@
   "author": "Maksim Milyutin <mmxckk@gmail.com> (https://github.com/mxck)",
   "license": "MIT",
   "scripts": {
+    "build": "tsc",
     "prettify": "prettier --write 'src/**/*.js' && eslint 'src/**/*.js'"
   },
   "devDependencies": {
     "@react-native-community/eslint-config": "~3.0.0",
     "eslint": "~7.32.0",
-    "prettier": "~2.3.0"
+    "prettier": "~2.3.0",
+    "typescript": "~4.3.5"
   },
   "peerDependencies": {
     "react": ">= 16.3.0",
