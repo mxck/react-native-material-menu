@@ -18,14 +18,8 @@
     "prettify": "import-sort --write 'src/**/*.js' && prettier --write 'src/**/*.js' && eslint 'src/**/*.js'"
   },
   "devDependencies": {
-    "babel-eslint": "~10.1.0",
+    "@react-native-community/eslint-config": "~3.0.0",
     "eslint": "~7.32.0",
-    "eslint-config-airbnb": "~18.2.0",
-    "eslint-config-prettier": "~8.3.0",
-    "eslint-plugin-import": "~2.24.0",
-    "eslint-plugin-jsx-a11y": "~6.4.1",
-    "eslint-plugin-react": "~7.24.0",
-    "eslint-plugin-react-hooks": "~4.2.0",
     "import-sort": "~6.0.0",
     "import-sort-cli": "~6.0.0",
     "import-sort-parser-babylon": "~6.0.0",

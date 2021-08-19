@@ -1,13 +1,10 @@
 module.exports = {
-  parser: 'babel-eslint',
-  extends: ['airbnb', 'prettier'],
+  extends: '@react-native-community',
 
   rules: {
-    'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
-
     'no-underscore-dangle': 'off',
     'no-use-before-define': 'off',
-    'import/no-unresolved': 'off', // peer dependecies
+    'import/no-unresolved': 'off', // peer dependencies
 
     // React
     'react/destructuring-assignment': 'off',
