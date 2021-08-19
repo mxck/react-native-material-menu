@@ -1,6 +1,0 @@
-{
-  ".js, .jsx": {
-    "parser": "babylon",
-    "style": "pietile"
-  }
-}
