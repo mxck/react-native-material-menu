@@ -16,6 +16,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
+    "prepublishOnly": "npm run build",
     "prettify": "prettier --write 'src/**/*.js' && eslint 'src/**/*.js'"
   },
   "devDependencies": {
