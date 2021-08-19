@@ -51,7 +51,7 @@ class Menu extends React.Component {
 
   // Start menu animation
   _onMenuLayout = (e) => {
-    if (this.state.menuState === STATES.ANIMATING) {
+    if (this.state.menuState !== STATES.SHOWN) {
       return;
     }
 
@@ -124,6 +124,12 @@ class Menu extends React.Component {
 
   // @@ TODO: Rework this
   _hide = () => {
+    if (!!this.props.blockedHide) {
+      // Avoid Menu to be closed on every screen clicked.
+
+      return;
+    }
+
     this.hide();
   };
 
