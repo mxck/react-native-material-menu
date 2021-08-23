@@ -32,8 +32,8 @@
     "typescript": "~4.3.5"
   },
   "peerDependencies": {
-    "react": ">= 17.0.1",
-    "react-native": ">= 0.54.0"
+    "react": "*",
+    "react-native": "*"
   },
   "bugs": {
     "url": "https://github.com/mxck/react-native-material-menu/issues"
