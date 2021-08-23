@@ -20,7 +20,7 @@ or using npm
 npm install --save react-native-material-menu
 ```
 
-## Usage example ([expo demo](https://snack.expo.io/@mxck/react-native-material-menu-demo))
+## Usage example
 
 ```jsx
 import React from 'react';
