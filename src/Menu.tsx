@@ -50,7 +50,7 @@ export class Menu extends React.Component<MenuProps, State> {
   _container: View | null = null;
 
   static defaultProps = {
-    animationDuration: 21,
+    animationDuration: 300,
   };
 
   constructor(props: MenuProps) {
@@ -82,7 +82,7 @@ export class Menu extends React.Component<MenuProps, State> {
   }
 
   componentDidUpdate(prevProps: MenuProps) {
-    if (prevProps === this.props.visible) {
+    if (prevProps.visible === this.props.visible) {
       return;
     }
 
@@ -228,7 +228,7 @@ export class Menu extends React.Component<MenuProps, State> {
 
     return (
       <View ref={this.setContainerRef} collapsable={false} testID={testID}>
-        <View>{anchor}</View>
+        {anchor}
 
         <Modal
           visible={modalVisible}

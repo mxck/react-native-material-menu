@@ -6,17 +6,16 @@ import {
   PressableProps,
   StyleSheet,
   Text,
-  TextProps,
   TextStyle,
   View,
   ViewStyle,
 } from 'react-native';
 
 export type MenuItemProps = {
-  children?: React.ReactNode;
+  children: React.ReactNode;
   disabled?: boolean;
   disabledTextColor?: string;
-  ellipsizeMode?: TextProps['ellipsizeMode'];
+  pressColor?: string;
   style?: ViewStyle;
   textStyle?: TextStyle;
 } & PressableProps;
@@ -25,17 +24,24 @@ export function MenuItem({
   children,
   disabled = false,
   disabledTextColor = '#bdbdbd',
-  ellipsizeMode = Platform.OS === 'ios' ? 'clip' : 'tail',
   onPress,
+  pressColor = '#e0e0e0',
   style,
   textStyle,
   ...props
 }: MenuItemProps) {
   return (
-    <Pressable disabled={disabled} onPress={onPress} {...props}>
+    <Pressable
+      disabled={disabled}
+      style={({ pressed }) => ({
+        backgroundColor: Platform.OS !== 'android' && pressed ? pressColor : undefined,
+      })}
+      android_ripple={{ color: pressColor }}
+      onPress={onPress}
+      {...props}
+    >
       <View style={[styles.container, style]}>
         <Text
-          ellipsizeMode={ellipsizeMode}
           numberOfLines={1}
           style={[styles.title, disabled && { color: disabledTextColor }, textStyle]}
         >
