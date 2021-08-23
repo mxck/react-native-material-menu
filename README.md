@@ -61,9 +61,9 @@ export default function App() {
 | children          | Components rendered in menu (required) | ReactNode | -       |
 | anchor            | Button component (required)            | ReactNode | -       |
 | visible           | Whether the Menu is currently visible  |   Boolean | -       |
-| style             | Menu style                             |     Style | -       |
+| style             | Menu style                             | ViewStyle | -       |
 | onRequestClose    | Callback when menu has become hidden   |  Function | -       |
-| animationDuration | Changes show() and hide() duration     |    Number | 300     |
+| animationDuration | Changes show/hide animation duration   |    Number | 300     |
 
 ## MenuItem
 
@@ -72,9 +72,9 @@ export default function App() {
 | children          | Rendered children (required) | ReactNode | -           |
 | disabled          | Disabled flag                |   Boolean | `false`     |
 | disabledTextColor | Disabled text color          |    String | `'#bdbdbd'` |
-| onPress           | Called function on press     |      Func | -           |
-| style             | Container style              |     Style | -           |
-| textStyle         | Text style                   |     Style | -           |
+| onPress           | Called function on press     |  Function | -           |
+| style             | Container style              | ViewStyle | -           |
+| textStyle         | Text style                   | TextStyle | -           |
 | pressColor        | Pressed color                |    String | `'#e0e0e0'` |
 
 > **Children** must be based on [`<Text>`][text component] component (like **text** itself, strings, [react-native-vector-icons] or [expo icons]) otherwise you may get an error on a real device.
