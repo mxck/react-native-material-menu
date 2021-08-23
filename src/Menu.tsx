@@ -17,7 +17,7 @@ import {
 
 export interface MenuProps {
   children?: React.ReactNode;
-  button?: React.ReactNode;
+  anchor?: React.ReactNode;
   style?: ViewStyle;
   onRequestClose?(): void;
   animationDuration?: number;
@@ -224,11 +224,11 @@ export class Menu extends React.Component<MenuProps, State> {
     const animationStarted = menuState === States.Animating;
     const modalVisible = menuState === States.Shown || animationStarted;
 
-    const { testID, button, style, children } = this.props;
+    const { testID, anchor, style, children } = this.props;
 
     return (
       <View ref={this.setContainerRef} collapsable={false} testID={testID}>
-        <View>{button}</View>
+        <View>{anchor}</View>
 
         <Modal
           visible={modalVisible}
