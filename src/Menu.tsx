@@ -143,19 +143,19 @@ export class Menu extends React.Component<MenuProps, State> {
   };
 
   private hide = () => {
-    Animated.timing(this.state.opacityAnimation, {
-      toValue: 0,
-      duration: this.props.animationDuration,
-      easing: EASING,
-      useNativeDriver: false,
-    }).start(() => {
-      // Reset state
+    // Animated.timing(this.state.opacityAnimation, {
+    //   toValue: 0,
+    //   duration: this.props.animationDuration,
+    //   easing: EASING,
+    //   useNativeDriver: false,
+    // }).start(() => {
+    //   // Reset state
       this.setState({
         menuState: States.Hidden,
-        menuSizeAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
-        opacityAnimation: new Animated.Value(0),
+        // menuSizeAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
+        // opacityAnimation: new Animated.Value(0),
       });
-    });
+    // });
   };
 
   private onRequestClose = () => {
@@ -263,22 +263,22 @@ export class Menu extends React.Component<MenuProps, State> {
 const styles = StyleSheet.create({
   shadowMenuContainer: {
     position: 'absolute',
-    backgroundColor: 'white',
-    borderRadius: 4,
-    opacity: 0,
+    // backgroundColor: 'white',
+    // borderRadius: 4,
+    // opacity: 0,
 
-    // Shadow
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.14,
-        shadowRadius: 2,
-      },
-      android: {
-        elevation: 8,
-      },
-    }),
+    // // Shadow
+    // ...Platform.select({
+    //   ios: {
+    //     shadowColor: 'black',
+    //     shadowOffset: { width: 0, height: 2 },
+    //     shadowOpacity: 0.14,
+    //     shadowRadius: 2,
+    //   },
+    //   android: {
+    //     elevation: 8,
+    //   },
+    // }),
   },
   menuContainer: {
     overflow: 'hidden',
