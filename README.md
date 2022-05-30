@@ -23,7 +23,6 @@ npm install --save react-native-material-menu
 ## Usage example
 
 ```jsx
-import React from 'react';
 import React, { useState } from 'react';
 
 import { View, Text } from 'react-native';
