@@ -231,7 +231,7 @@ export class Menu extends React.Component<MenuProps, State> {
         {anchor}
 
         <Modal
-          visible={modalVisible}
+          visible={modalVisible && this.props.visible}
           onRequestClose={this.onRequestClose}
           supportedOrientations={[
             'portrait',
