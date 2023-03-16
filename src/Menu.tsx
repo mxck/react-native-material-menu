@@ -6,13 +6,11 @@ import {
   Easing,
   I18nManager,
   LayoutChangeEvent,
-  Modal,
-  Platform,
-  StatusBar,
+  Modal, StatusBar,
   StyleSheet,
   TouchableWithoutFeedback,
   View,
-  ViewStyle,
+  ViewStyle
 } from 'react-native';
 
 export interface MenuProps {
@@ -23,6 +21,8 @@ export interface MenuProps {
   animationDuration?: number;
   testID?: string;
   visible?: boolean;
+  top?: any;
+  left?: any;
 }
 
 enum States {
@@ -135,9 +135,9 @@ export class Menu extends React.Component<MenuProps, State> {
       this.setState({
         buttonHeight,
         buttonWidth,
-        left,
+        left: this.props.left ? this.props.left : left,
         menuState: States.Shown,
-        top,
+        top: this.props.top ? this.props.top : top,
       });
     });
   };
